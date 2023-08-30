@@ -1,5 +1,5 @@
+import 'package:weoveri_capsule_button/capsule_button.dart';
 import 'package:flutter/material.dart';
-import 'capsule_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,9 +35,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Flutter Demo Home Page'),
       ),
-      body: const Center(
+      body: Center(
         child: MyCapsuleButton(
           text: 'button',
+          onTap: () {},
         ),
       ),
     );
