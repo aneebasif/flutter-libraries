@@ -9,7 +9,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
     required this.text,
     required this.onTap,
     required this.icon,
-    this.borderRadius = 50,
+    // this.borderRadius = 50,
     this.textStyle,
     this.borderColor,
     this.heigth,
@@ -18,7 +18,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
     this.isDisabled = false,
     this.iconLocation = IconLocation.start,
   }) : super(key: key);
-  final double borderRadius;
+  // final double borderRadius;
   final String? text;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
@@ -39,7 +39,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isDisabled ? disabledColor : fillColor ?? Colors.black,
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.circular(50),
           border: Border.all(
             color: isDisabled ? disabledColor : borderColor ?? Colors.black,
           ),
@@ -48,6 +48,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
         width: width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisSize: MainAxisSize.min,
           children: [
             iconLocation == IconLocation.start ? icon : Container(),
             _textContainer(),

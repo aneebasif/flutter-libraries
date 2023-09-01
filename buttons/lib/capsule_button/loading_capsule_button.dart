@@ -5,7 +5,7 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
   const WoiCapsuleLoadingButton({
     Key? key,
     required this.onTap,
-    this.borderRadius = 50,
+    // this.borderRadius = 50,
     this.textStyle,
     this.borderColor,
     this.heigth,
@@ -15,7 +15,7 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
     this.circularProgressSize = 20,
     required this.circularProgressIndicator,
   }) : super(key: key);
-  final double borderRadius;
+  // final double borderRadius;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
   final Color? borderColor;
@@ -35,7 +35,7 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isDisabled ? disabledColor : fillColor ?? Colors.black,
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.circular(50),
           border: Border.all(
             color: isDisabled ? disabledColor : borderColor ?? Colors.black,
           ),
