@@ -38,6 +38,3 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run tests
         run: dart test
-
-       - name: Format project source
-         run: dart formate
