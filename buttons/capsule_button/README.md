@@ -3,28 +3,33 @@
 
 ## Getting started
 
-Import the plugin and call the `MyCapsuleButton` and you are good to go... 🎉
+Import the plugin and call the `WoiCapsuleButton` and you are good to go... 🎉
 
-There are other simple buttons as well like `IconCapsuleButton` and `GradientCapsuleButton` for different scnarios
+Here are the list of all of the buttons present in the package:
+### Capsule Buttons
+`WoiCapsuleIconButton`
+`WoiCapsuleGradientButton`
+`WoiCapsuleLoadingButton`
+
 
 ```yaml
 # add this line to your dependencies
-weoveri_capsule_button: ^0.0.1
+weoveri_button: ^0.0.1
 ```
 
 ```dart
-import 'package:weoveri_capsule_button/calendar_widget.dart';
+import 'package:weoveri_button/main.dart';
 ```
 
 ## Usage
 
-As simple as using a TextButton widget just call the `MyCapsuleButton`.
+As simple as using a TextButton widget just call the `WoiCapsuleButton`.
 
 Although `text` and `onTap` is required to show the inital text of the button and tap action.
 
 
 ```dart
-MyCapsuleButton(
+WoiCapsuleButton(
     text: 'Confirm',
     onTap: () {},
 )
