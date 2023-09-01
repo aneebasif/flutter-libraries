@@ -8,8 +8,13 @@ Import the plugin and call the `WoiCapsuleButton` and you are good to go... 🎉
 Here are the list of all of the buttons present in the package:
 ### Capsule Buttons
 `WoiCapsuleIconButton`
+
 `WoiCapsuleGradientButton`
+
 `WoiCapsuleLoadingButton`
+
+`WoiBaseButton`
+
 
 
 ```yaml
