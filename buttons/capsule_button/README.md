@@ -1,39 +1,44 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+## A plugin for all of your material clean buttons
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Import the plugin and call the `MyCapsuleButton` and you are good to go... 🎉
+
+There are other simple buttons as well like `IconCapsuleButton` and `GradientCapsuleButton` for different scnarios
+
+```yaml
+# add this line to your dependencies
+weoveri_capsule_button: ^0.0.1
+```
+
+```dart
+import 'package:weoveri_capsule_button/calendar_widget.dart';
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+As simple as using a TextButton widget just call the `MyCapsuleButton`.
+
+Although `text` and `onTap` is required to show the inital text of the button and tap action.
+
 
 ```dart
-const like = 'sample';
+MyCapsuleButton(
+    text: 'Confirm',
+    onTap: () {},
+)
 ```
+
+|Parameter|Description|
+|-----------------------------------|--------------------------------------|
+|textStyle   |is used to provide textStyle for the text used in button|
+|borderColor    |By default the border color is black|
+|backgroundColor      |The default value is black|
+|borderRadius |Option to change the border radius, default value is 50|
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Incase of any issues or assistance please reach out on [saad@we-over-i.com](mailto:saad@we-over-i.com) or [saadjavaidalvi@gmail.com](mailto:saadjavaidalvi@gmail.com)
+
+Have Fun!
