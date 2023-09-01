@@ -1,12 +1,9 @@
-library weoveri_capsule_button;
-
 import 'package:flutter/material.dart';
 
 /// An all in one capsule button
-class MyCapsuleButton extends StatelessWidget {
-  const MyCapsuleButton({
+class WoiCapsuleLoadingButton extends StatelessWidget {
+  const WoiCapsuleLoadingButton({
     Key? key,
-    required this.text,
     required this.onTap,
     this.borderRadius = 50,
     this.textStyle,
@@ -15,9 +12,10 @@ class MyCapsuleButton extends StatelessWidget {
     this.width,
     this.fillColor,
     this.isDisabled = false,
+    this.circularProgressSize = 20,
+    required this.circularProgressIndicator,
   }) : super(key: key);
   final double borderRadius;
-  final String? text;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
   final Color? borderColor;
@@ -25,6 +23,8 @@ class MyCapsuleButton extends StatelessWidget {
   final Color? fillColor;
   final double? width;
   final bool isDisabled;
+  final CircularProgressIndicator circularProgressIndicator;
+  final double circularProgressSize;
 
   final Color disabledColor = const Color(0xffD9D9D9);
 
@@ -45,24 +45,17 @@ class MyCapsuleButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _textContainer(),
+            _curcularProgressContainer(),
           ],
         ),
       ),
     );
   }
 
-  Widget _textContainer() {
-    return Text(
-      text!,
-      overflow: TextOverflow.ellipsis,
-      style: textStyle ??
-          const TextStyle(
-            height: 1,
-            color: Colors.white,
-            fontSize: 11,
-          ),
-      textAlign: TextAlign.center,
-    );
+  Widget _curcularProgressContainer() {
+    return Container(
+        height: circularProgressSize,
+        width: circularProgressSize,
+        child: circularProgressIndicator);
   }
 }
