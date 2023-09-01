@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
               width: 200,
             ),
             WoiCapsuleIconButton(
-              text: 'button'.toUpperCase(),
+              text: 'Icon button'.toUpperCase(),
               onTap: () {},
               icon: const Padding(
                 padding: EdgeInsets.only(right: 8.0),
@@ -49,12 +49,28 @@ class MyApp extends StatelessWidget {
             WoiCapsuleGradientButton(
               onTap: () {},
               width: 200,
-              text: 'Button',
+              text: 'Gradient Button',
               gradient: const LinearGradient(
                 colors: [
                   Colors.red,
                   Colors.green,
+                  Colors.blue,
                 ],
+              ),
+            ),
+            WoiBaseButton(
+              onTap: () {},
+              width: 200,
+              text: 'Base Button'.toUpperCase(),
+              borderRadius: 0,
+              icon: const Padding(
+                padding: EdgeInsets.only(
+                  right: 8,
+                ),
+                child: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
               ),
             ),
             Row(),
