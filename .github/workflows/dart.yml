@@ -40,4 +40,4 @@ jobs:
         run: dart test
 
        - name: Format project source
-        run: dart formate
+         run: dart formate
