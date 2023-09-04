@@ -15,7 +15,7 @@ jobs:
 
   defaults:
     run:
-      working-directory: buttons
+      working-directory: ./buttons
 
     steps:
       - uses: actions/checkout@v3
