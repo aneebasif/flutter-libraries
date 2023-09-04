@@ -13,9 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: buttons
+  defaults:
+    run:
+      working-directory: buttons
 
     steps:
       - uses: actions/checkout@v3
