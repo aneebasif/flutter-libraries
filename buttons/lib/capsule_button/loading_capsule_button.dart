@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 
 /// An all in one capsule button
-class WoiCapsuleGradientButton extends StatelessWidget {
-  const WoiCapsuleGradientButton({
+class WoiCapsuleLoadingButton extends StatelessWidget {
+  const WoiCapsuleLoadingButton({
     Key? key,
-    required this.text,
     required this.onTap,
-    this.borderRadius = 50,
+    // this.borderRadius = 50,
     this.textStyle,
     this.borderColor,
     this.heigth,
     this.width,
-    required this.gradient,
+    this.fillColor,
     this.isDisabled = false,
+    this.circularProgressSize = 20,
+    required this.circularProgressIndicator,
   }) : super(key: key);
-  final double borderRadius;
-  final String? text;
+  // final double borderRadius;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
   final Color? borderColor;
   final double? heigth;
-  final Gradient? gradient;
+  final Color? fillColor;
   final double? width;
   final bool isDisabled;
+  final CircularProgressIndicator circularProgressIndicator;
+  final double circularProgressSize;
 
   final Color disabledColor = const Color(0xffD9D9D9);
 
@@ -32,8 +34,8 @@ class WoiCapsuleGradientButton extends StatelessWidget {
       onTap: isDisabled ? null : onTap,
       child: Container(
         decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: BorderRadius.circular(borderRadius),
+          color: isDisabled ? disabledColor : fillColor ?? Colors.black,
+          borderRadius: BorderRadius.circular(50),
           border: Border.all(
             color: isDisabled ? disabledColor : borderColor ?? Colors.black,
           ),
@@ -43,24 +45,17 @@ class WoiCapsuleGradientButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _textContainer(),
+            _curcularProgressContainer(),
           ],
         ),
       ),
     );
   }
 
-  Widget _textContainer() {
-    return Text(
-      text!,
-      overflow: TextOverflow.ellipsis,
-      style: textStyle ??
-          const TextStyle(
-            height: 1,
-            color: Colors.white,
-            fontSize: 11,
-          ),
-      textAlign: TextAlign.center,
-    );
+  Widget _curcularProgressContainer() {
+    return Container(
+        height: circularProgressSize,
+        width: circularProgressSize,
+        child: circularProgressIndicator);
   }
 }

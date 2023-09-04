@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
+enum IconLocation { start, end }
+
 /// An all in one capsule button
-class WoiCapsuleLoadingButton extends StatelessWidget {
-  const WoiCapsuleLoadingButton({
+class WoiCapsuleIconButton extends StatelessWidget {
+  const WoiCapsuleIconButton({
     Key? key,
+    required this.text,
     required this.onTap,
-    this.borderRadius = 50,
+    required this.icon,
+    // this.borderRadius = 50,
     this.textStyle,
     this.borderColor,
     this.heigth,
     this.width,
     this.fillColor,
     this.isDisabled = false,
-    this.circularProgressSize = 20,
-    required this.circularProgressIndicator,
+    this.iconLocation = IconLocation.start,
   }) : super(key: key);
-  final double borderRadius;
+  // final double borderRadius;
+  final String? text;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
   final Color? borderColor;
@@ -23,8 +27,8 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
   final Color? fillColor;
   final double? width;
   final bool isDisabled;
-  final CircularProgressIndicator circularProgressIndicator;
-  final double circularProgressSize;
+  final IconLocation iconLocation;
+  final Widget icon;
 
   final Color disabledColor = const Color(0xffD9D9D9);
 
@@ -35,7 +39,7 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isDisabled ? disabledColor : fillColor ?? Colors.black,
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.circular(50),
           border: Border.all(
             color: isDisabled ? disabledColor : borderColor ?? Colors.black,
           ),
@@ -44,18 +48,28 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
         width: width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisSize: MainAxisSize.min,
           children: [
-            _curcularProgressContainer(),
+            iconLocation == IconLocation.start ? icon : Container(),
+            _textContainer(),
+            iconLocation == IconLocation.end ? icon : Container(),
           ],
         ),
       ),
     );
   }
 
-  Widget _curcularProgressContainer() {
-    return Container(
-        height: circularProgressSize,
-        width: circularProgressSize,
-        child: circularProgressIndicator);
+  Widget _textContainer() {
+    return Text(
+      text!,
+      overflow: TextOverflow.ellipsis,
+      style: textStyle ??
+          const TextStyle(
+            height: 1,
+            color: Colors.white,
+            fontSize: 11,
+          ),
+      textAlign: TextAlign.center,
+    );
   }
 }

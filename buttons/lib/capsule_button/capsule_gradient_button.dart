@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
 /// An all in one capsule button
-class WoiCapsuleButton extends StatelessWidget {
-  const WoiCapsuleButton({
+class WoiCapsuleGradientButton extends StatelessWidget {
+  const WoiCapsuleGradientButton({
     Key? key,
     required this.text,
     required this.onTap,
-    this.borderRadius = 50,
+    // this.borderRadius = 50,
     this.textStyle,
     this.borderColor,
     this.heigth,
     this.width,
-    this.fillColor,
+    required this.gradient,
     this.isDisabled = false,
   }) : super(key: key);
-  final double borderRadius;
+  // final double borderRadius;
   final String? text;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
   final Color? borderColor;
   final double? heigth;
-  final Color? fillColor;
+  final Gradient? gradient;
   final double? width;
   final bool isDisabled;
 
@@ -32,8 +32,8 @@ class WoiCapsuleButton extends StatelessWidget {
       onTap: isDisabled ? null : onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isDisabled ? disabledColor : fillColor ?? Colors.black,
-          borderRadius: BorderRadius.circular(borderRadius),
+          gradient: gradient,
+          borderRadius: BorderRadius.circular(50),
           border: Border.all(
             color: isDisabled ? disabledColor : borderColor ?? Colors.black,
           ),

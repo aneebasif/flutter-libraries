@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-enum IconLocation { start, end }
+import 'capsule_icon_button.dart';
 
 /// An all in one capsule button
-class WoiCapsuleIconButton extends StatelessWidget {
-  const WoiCapsuleIconButton({
+class WoiBaseButton extends StatelessWidget {
+  const WoiBaseButton({
     Key? key,
     required this.text,
     required this.onTap,
-    required this.icon,
+    this.icon,
     this.borderRadius = 50,
     this.textStyle,
     this.borderColor,
@@ -28,8 +28,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
   final double? width;
   final bool isDisabled;
   final IconLocation iconLocation;
-  final Widget icon;
-
+  final Widget? icon;
   final Color disabledColor = const Color(0xffD9D9D9);
 
   @override
@@ -49,9 +48,13 @@ class WoiCapsuleIconButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            iconLocation == IconLocation.start ? icon : Container(),
+            iconLocation == IconLocation.start
+                ? icon ?? Container()
+                : Container(),
             _textContainer(),
-            iconLocation == IconLocation.end ? icon : Container(),
+            iconLocation == IconLocation.end
+                ? icon ?? Container()
+                : Container(),
           ],
         ),
       ),
