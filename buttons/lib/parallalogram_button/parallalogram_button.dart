@@ -11,7 +11,7 @@ enum TiltSide {
 class ParallalogramButton extends StatelessWidget {
   const ParallalogramButton({
     Key? key,
-    required this.onPressed,
+    this.onPressed,
     this.buttonColor = Colors.black,
     this.borderColor,
     this.borderWdth = 1,
@@ -27,7 +27,7 @@ class ParallalogramButton extends StatelessWidget {
   }) : super(key: key);
 
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color buttonColor;
   final List<BoxShadow>? boxShadow;
   final Color? borderColor;
@@ -47,7 +47,7 @@ class ParallalogramButton extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(boxShadow: boxShadow),
       child: GestureDetector(
-        onTap: onPressed,
+        onTap: onPressed!,
         child: CustomPaint(
           painter: MyParallelogram(
             tilt: tiltSide == TiltSide.right ? tilt : -tilt,
