@@ -22,11 +22,7 @@ class MyApp extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            WoiCapsuleButton(
-              text: 'button'.toUpperCase(),
-              onTap: () {},
-              width: 200,
-            ),
+            //Capsule Button
             WoiCapsuleIconButton(
               text: 'Icon button'.toUpperCase(),
               onTap: () {},
@@ -40,40 +36,18 @@ class MyApp extends StatelessWidget {
               iconLocation: IconLocation.start,
               width: 200,
             ),
-            WoiCapsuleLoadingButton(
-              onTap: () {},
-              circularProgressIndicator: const CircularProgressIndicator(),
-              circularProgressSize: 20,
-              width: 200,
-            ),
-            WoiCapsuleGradientButton(
-              onTap: () {},
-              width: 200,
-              text: 'Gradient Button',
-              gradient: const LinearGradient(
-                colors: [
-                  Colors.red,
-                  Colors.green,
-                  Colors.blue,
-                ],
-              ),
-            ),
-            WoiBaseButton(
-              onTap: () {},
-              width: 200,
-              text: 'Base Button'.toUpperCase(),
-              borderRadius: 0,
-              icon: const Padding(
-                padding: EdgeInsets.only(
-                  right: 8,
+            // Parallalogram Button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ParallalogramButton(
+                  text: "Regular Button",
+                  tiltSide: TiltSide.right,
+                  buttonColor: Colors.black,
+                  onPressed: () {},
                 ),
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-              ),
+              ],
             ),
-            Row(),
           ],
         ),
       ),
