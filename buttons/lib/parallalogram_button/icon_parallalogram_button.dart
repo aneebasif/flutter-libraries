@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_button/enums.dart';
 import 'package:weoveri_button/parallalogram_button/parallalogram_painter.dart';
 
-import '../enums.dart';
-
-/// A button that is tilt from sides and accept a `Text` in the center
-class ParallalogramButton extends StatelessWidget {
-  const ParallalogramButton({
+/// This defines the tilt side for it to be on the right or left side
+/// A button that is tilt from sides and accept a `Text` and `icon` in the center
+/// `Icons` can be in prefix and sufix
+class IconParallalogramButton extends StatelessWidget {
+  const IconParallalogramButton({
     Key? key,
     this.onPressed,
     this.buttonColor = Colors.black,
+    required this.icon,
+    this.iconLocation = IconLocation.start,
     this.borderColor,
     this.borderWdth = 1,
     this.margin,
@@ -23,6 +26,8 @@ class ParallalogramButton extends StatelessWidget {
   }) : super(key: key);
 
   final String text;
+  final Widget icon;
+  final IconLocation? iconLocation;
   final VoidCallback? onPressed;
   final Color buttonColor;
   final List<BoxShadow>? boxShadow;
@@ -57,12 +62,18 @@ class ParallalogramButton extends StatelessWidget {
                   const EdgeInsets.symmetric(
                     horizontal: 24,
                   ),
-              child: Text(
-                text,
-                style: textStyle ??
-                    const TextStyle(
-                      color: Colors.white,
-                    ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icon,
+                  Text(
+                    text,
+                    style: textStyle ??
+                        const TextStyle(
+                          color: Colors.white,
+                        ),
+                  ),
+                ],
               ),
             ),
           ),

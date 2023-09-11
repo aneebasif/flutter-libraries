@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //Capsule Button
+            //----------Capsule Button-------------
             WoiCapsuleIconButton(
               text: 'Icon button'.toUpperCase(),
               onTap: () {},
@@ -36,12 +36,21 @@ class MyApp extends StatelessWidget {
               iconLocation: IconLocation.start,
               width: 200,
             ),
-            // Parallalogram Button
+            //----------Parallalogram Button-------------
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ParallalogramButton(
+                IconParallalogramButton(
                   text: "Regular Button",
+                  icon: const Padding(
+                    padding: EdgeInsets.only(
+                      right: 8.0,
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ),
                   tiltSide: TiltSide.right,
                   buttonColor: Colors.black,
                   onPressed: () {},

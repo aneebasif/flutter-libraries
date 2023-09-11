@@ -9,3 +9,7 @@ export 'capsule_button/base_capsule_button.dart';
 
 // Parallalogram Button
 export 'parallalogram_button/parallalogram_button.dart';
+export 'parallalogram_button/icon_parallalogram_button.dart';
+
+// Parallalogram Button
+export 'enums.dart';

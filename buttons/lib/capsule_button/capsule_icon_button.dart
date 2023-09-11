@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum IconLocation { start, end }
+import '../enums.dart';
 
 /// An all in one capsule button
 class WoiCapsuleIconButton extends StatelessWidget {
