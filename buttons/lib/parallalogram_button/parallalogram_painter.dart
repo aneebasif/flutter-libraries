@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// A custom painter for ractangle shaped container with tilted sides
 class MyParallelogram extends CustomPainter {
   final double borderWidth;
   final Color buttonColor;
