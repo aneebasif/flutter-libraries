@@ -33,27 +33,23 @@ class MyApp extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              iconLocation: IconLocation.start,
+              iconLocation: WidgetLocation.start,
               width: 200,
             ),
             //----------Parallalogram Button-------------
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconParallalogramButton(
-                  text: "Regular Button",
-                  icon: const Padding(
-                    padding: EdgeInsets.only(
-                      right: 8.0,
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                  ),
+                LoadingParallalogramButton(
+                  text: "Parallalogram Button".toUpperCase(),
                   tiltSide: TiltSide.right,
                   buttonColor: Colors.black,
                   onPressed: () {},
+                  loadingProgressIndicator: const CircularProgressIndicator(),
+                  indicatorMargin: const EdgeInsets.only(
+                    right: 8,
+                  ),
+                  indicatorSize: 24,
                 ),
               ],
             ),

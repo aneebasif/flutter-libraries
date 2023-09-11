@@ -16,7 +16,7 @@ class WoiBaseButton extends StatelessWidget {
     this.width,
     this.fillColor,
     this.isDisabled = false,
-    this.iconLocation = IconLocation.start,
+    this.iconLocation = WidgetLocation.start,
     this.boxShadowList,
   }) : super(key: key);
   final double borderRadius;
@@ -28,7 +28,7 @@ class WoiBaseButton extends StatelessWidget {
   final Color? fillColor;
   final double? width;
   final bool isDisabled;
-  final IconLocation iconLocation;
+  final WidgetLocation iconLocation;
   final Widget? icon;
   final Color disabledColor = const Color(0xffD9D9D9);
   final List<BoxShadow>? boxShadowList;
@@ -51,11 +51,11 @@ class WoiBaseButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            iconLocation == IconLocation.start
+            iconLocation == WidgetLocation.start
                 ? icon ?? Container()
                 : Container(),
             _textContainer(),
-            iconLocation == IconLocation.end
+            iconLocation == WidgetLocation.end
                 ? icon ?? Container()
                 : Container(),
           ],

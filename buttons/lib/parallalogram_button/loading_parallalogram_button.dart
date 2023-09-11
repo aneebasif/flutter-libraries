@@ -5,13 +5,14 @@ import 'package:weoveri_button/parallalogram_button/parallalogram_painter.dart';
 /// This defines the tilt side for it to be on the right or left side
 /// A button that is tilt from sides and accept a `Text` and `icon` in the center
 /// `Icons` can be in prefix and sufix
-class IconParallalogramButton extends StatelessWidget {
-  const IconParallalogramButton({
+class LoadingParallalogramButton extends StatelessWidget {
+  const LoadingParallalogramButton({
     Key? key,
     this.onPressed,
     this.buttonColor = Colors.black,
-    required this.icon,
+    required this.loadingProgressIndicator,
     this.iconLocation = WidgetLocation.start,
+    this.indicatorSize = 24,
     this.borderColor,
     this.borderWdth = 1,
     this.margin,
@@ -23,10 +24,11 @@ class IconParallalogramButton extends StatelessWidget {
     this.textStyle,
     this.textMargin,
     this.tiltSide = TiltSide.right,
+    this.indicatorMargin,
   }) : super(key: key);
 
   final String text;
-  final Widget icon;
+  final CircularProgressIndicator loadingProgressIndicator;
   final WidgetLocation? iconLocation;
   final VoidCallback? onPressed;
   final Color buttonColor;
@@ -40,6 +42,8 @@ class IconParallalogramButton extends StatelessWidget {
   final TextStyle? textStyle;
   final EdgeInsets? textMargin;
   final TiltSide? tiltSide;
+  final double? indicatorSize;
+  final EdgeInsets? indicatorMargin;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +69,12 @@ class IconParallalogramButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  icon,
+                  Container(
+                    height: indicatorSize,
+                    width: indicatorSize,
+                    margin: indicatorMargin,
+                    child: loadingProgressIndicator,
+                  ),
                   Text(
                     text,
                     style: textStyle ??
