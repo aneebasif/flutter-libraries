@@ -24,10 +24,42 @@ class MyApp extends StatelessWidget {
           children: [
             //----------Capsule Button-------------
             WoiCapsuleIconButton(
+              onTap: () {},
+              width: 300,
+              icon: const Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+              ),
+              text: 'Hellow There!!!',
+            ),
+            WoiCapsuleGradientButton(
+              onTap: () {},
+              text: 'Hello There!!!',
+              textStyle: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+              width: 300,
+              gradient: const LinearGradient(
+                colors: [
+                  Colors.black,
+                  Colors.green,
+                  Colors.blue,
+                  Colors.orange,
+                  Colors.black,
+                ],
+              ),
+            ),
+            WoiCapsuleIconButton(
               text: 'Icon button'.toUpperCase(),
               onTap: () {},
               icon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
+                padding: EdgeInsets.only(
+                  right: 8.0,
+                ),
                 child: Icon(
                   Icons.add_link,
                   color: Colors.white,
