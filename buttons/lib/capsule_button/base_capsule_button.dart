@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_button/capsule_button/woi_button_style.dart';
 
 import '../enums.dart';
 
@@ -6,32 +7,26 @@ import '../enums.dart';
 class WoiBaseButton extends StatelessWidget {
   const WoiBaseButton({
     Key? key,
-    required this.text,
     required this.onTap,
-    this.icon,
     this.borderRadius = 50,
-    this.textStyle,
     this.borderColor,
     this.heigth,
     this.width,
     this.fillColor,
     this.isDisabled = false,
-    this.iconLocation = WidgetLocation.start,
     this.boxShadowList,
+    this.buttonStyle,
   }) : super(key: key);
   final double borderRadius;
-  final String? text;
   final VoidCallback? onTap;
-  final TextStyle? textStyle;
   final Color? borderColor;
   final double? heigth;
   final Color? fillColor;
   final double? width;
   final bool isDisabled;
-  final WidgetLocation iconLocation;
-  final Widget? icon;
   final Color disabledColor = const Color(0xffD9D9D9);
   final List<BoxShadow>? boxShadowList;
+  final WoiButtonStyle? buttonStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -39,24 +34,29 @@ class WoiBaseButton extends StatelessWidget {
       onTap: isDisabled ? null : onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isDisabled ? disabledColor : fillColor ?? Colors.black,
-          borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(
-            color: isDisabled ? disabledColor : borderColor ?? Colors.black,
-          ),
-          boxShadow: boxShadowList,
+          color: buttonStyle?.backgroundColor ?? fillColor ?? Colors.black,
+          borderRadius:
+              buttonStyle?.borderRadius ?? BorderRadius.circular(borderRadius),
+          border: buttonStyle?.border ??
+              Border.all(
+                color: isDisabled ? disabledColor : borderColor ?? Colors.black,
+              ),
+          gradient: buttonStyle?.gradient,
+          boxShadow: buttonStyle?.boxShadow ?? boxShadowList,
         ),
-        height: heigth ?? 38,
-        width: width,
+        height: buttonStyle?.height ?? heigth ?? 38,
+        width: buttonStyle?.width ?? width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            iconLocation == WidgetLocation.start
-                ? icon ?? Container()
+            (buttonStyle?.widgetLocation ?? WidgetLocation.start) ==
+                    WidgetLocation.start
+                ? _prePostWidgets()
                 : Container(),
             _textContainer(),
-            iconLocation == WidgetLocation.end
-                ? icon ?? Container()
+            (buttonStyle?.widgetLocation ?? WidgetLocation.start) ==
+                    WidgetLocation.end
+                ? _prePostWidgets()
                 : Container(),
           ],
         ),
@@ -64,11 +64,28 @@ class WoiBaseButton extends StatelessWidget {
     );
   }
 
+  Widget _prePostWidgets() {
+    if (buttonStyle?.icon != null) {
+      return buttonStyle!.icon!;
+    }
+    if (buttonStyle?.circularProgressIndicator != null) {
+      return SizedBox(
+        height: buttonStyle!.progressIndicatorheight!,
+        width: buttonStyle!.progressIndicatorheight!,
+        child: buttonStyle!.circularProgressIndicator!,
+      );
+    }
+    return Container();
+  }
+
   Widget _textContainer() {
+    if (buttonStyle?.text == null) {
+      return Container();
+    }
     return Text(
-      text!,
+      buttonStyle?.text ?? '',
       overflow: TextOverflow.ellipsis,
-      style: textStyle ??
+      style: buttonStyle?.textStyle ??
           const TextStyle(
             height: 1,
             color: Colors.white,
