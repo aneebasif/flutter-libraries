@@ -55,7 +55,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
       buttonStyle: WoiButtonStyle(
         backgroundColor: fillColor ?? buttonStyle.backgroundColor,
         text: text,
-        icon: icon,
+        widget: icon,
         height: heigth,
         widgetLocation: iconLocation,
         width: width,

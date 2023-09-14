@@ -5,7 +5,7 @@ class WoiButtonStyle {
   TextStyle? textStyle;
   BorderRadius? borderRadius;
   Border? border;
-  Widget? icon;
+  Widget? widget;
   WidgetLocation widgetLocation;
   CircularProgressIndicator? circularProgressIndicator;
   String? text;
@@ -19,7 +19,7 @@ class WoiButtonStyle {
     this.textStyle,
     this.borderRadius,
     this.border,
-    this.icon,
+    this.widget,
     this.widgetLocation = WidgetLocation.start,
     this.circularProgressIndicator,
     this.text,

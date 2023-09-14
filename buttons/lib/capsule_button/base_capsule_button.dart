@@ -7,7 +7,7 @@ import '../enums.dart';
 class WoiBaseButton extends StatelessWidget {
   const WoiBaseButton({
     Key? key,
-    required this.onTap,
+    this.onTap,
     this.borderRadius = 50,
     this.borderColor,
     this.heigth,
@@ -64,14 +64,14 @@ class WoiBaseButton extends StatelessWidget {
   }
 
   Widget _prePostWidgets() {
-    if (buttonStyle?.icon != null) {
-      return buttonStyle!.icon!;
+    if (buttonStyle?.widget != null) {
+      return buttonStyle!.widget!;
     }
     if (buttonStyle?.circularProgressIndicator != null) {
       return SizedBox(
-        height: buttonStyle!.progressIndicatorheight!,
-        width: buttonStyle!.progressIndicatorheight!,
-        child: buttonStyle!.circularProgressIndicator!,
+        height: buttonStyle?.progressIndicatorheight,
+        width: buttonStyle?.progressIndicatorheight,
+        child: buttonStyle?.circularProgressIndicator,
       );
     }
     return Container();

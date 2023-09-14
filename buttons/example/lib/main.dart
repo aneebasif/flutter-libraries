@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_button/capsule_button/woi_button_style.dart';
 import 'package:weoveri_button/main.dart';
 
 void main() {
@@ -23,6 +24,18 @@ class MyApp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //----------Capsule Button-------------
+            WoiBaseButton(
+              buttonStyle: WoiButtonStyle(
+                circularProgressIndicator: const CircularProgressIndicator(),
+                progressIndicatorheight: 15,
+                // widgetLocation: WidgetLocation.end,
+                text: 'Submit'.toUpperCase(),
+                textStyle: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+            ),
             WoiCapsuleButton(
               onTap: () {},
               width: 300,
