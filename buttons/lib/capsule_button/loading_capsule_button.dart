@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_button/capsule_button/woi_button_style.dart';
+import 'package:weoveri_button/enums.dart';
+
+import 'base_capsule_button.dart';
 
 /// An all in one capsule button
 class WoiCapsuleLoadingButton extends StatelessWidget {
-  const WoiCapsuleLoadingButton({
+  WoiCapsuleLoadingButton({
     Key? key,
     required this.onTap,
     this.textStyle,
@@ -14,9 +18,13 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
     this.circularProgressSize = 20,
     required this.circularProgressIndicator,
     this.boxShadowList,
+    this.text = '',
+    this.widgetLocation = WidgetLocation.start,
+    this.borderWidth = 1,
   }) : super(key: key);
   final VoidCallback? onTap;
   final TextStyle? textStyle;
+  final String text;
   final Color? borderColor;
   final double? heigth;
   final Color? fillColor;
@@ -26,36 +34,39 @@ class WoiCapsuleLoadingButton extends StatelessWidget {
   final double circularProgressSize;
   final List<BoxShadow>? boxShadowList;
   final Color disabledColor = const Color(0xffD9D9D9);
+  final WidgetLocation widgetLocation;
+  final double borderWidth;
+
+  final WoiButtonStyle buttonStyle = WoiButtonStyle(
+    border: Border.all(
+      color: Colors.black,
+    ),
+    backgroundColor: Colors.black,
+    borderRadius: BorderRadius.circular(50),
+  );
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: isDisabled ? null : onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: isDisabled ? disabledColor : fillColor ?? Colors.black,
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(
-            color: isDisabled ? disabledColor : borderColor ?? Colors.black,
-          ),
-          boxShadow: boxShadowList,
-        ),
-        height: heigth ?? 38,
+    return WoiBaseButton(
+      onTap: () {
+        if (isDisabled) {
+          return;
+        }
+        onTap!();
+      },
+      buttonStyle: WoiButtonStyle(
+        backgroundColor: fillColor ?? buttonStyle.backgroundColor,
+        text: text,
+        height: heigth,
+        widgetLocation: widgetLocation,
         width: width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _curcularProgressContainer(),
-          ],
+        boxShadow: boxShadowList,
+        textStyle: textStyle,
+        border: Border.all(
+          color: borderColor ?? Colors.black,
+          width: borderWidth,
         ),
       ),
     );
-  }
-
-  Widget _curcularProgressContainer() {
-    return SizedBox(
-        height: circularProgressSize,
-        width: circularProgressSize,
-        child: circularProgressIndicator);
   }
 }

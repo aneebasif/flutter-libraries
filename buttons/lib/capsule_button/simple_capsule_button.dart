@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_button/capsule_button/woi_button_style.dart';
+
+import 'base_capsule_button.dart';
 
 /// An all in one capsule button
 class WoiCapsuleButton extends StatelessWidget {
-  const WoiCapsuleButton({
+  WoiCapsuleButton({
     Key? key,
     required this.text,
     required this.onTap,
@@ -13,6 +16,7 @@ class WoiCapsuleButton extends StatelessWidget {
     this.fillColor,
     this.isDisabled = false,
     this.boxShadowList,
+    this.borderWidth = 1,
   }) : super(key: key);
   final String? text;
   final VoidCallback? onTap;
@@ -23,11 +27,39 @@ class WoiCapsuleButton extends StatelessWidget {
   final double? width;
   final bool isDisabled;
   final List<BoxShadow>? boxShadowList;
-  final Color disabledColor = const Color(0xffD9D9D9);
+  final double borderWidth;
+
+  final WoiButtonStyle buttonStyle = WoiButtonStyle(
+    border: Border.all(
+      color: Colors.black,
+    ),
+    backgroundColor: Colors.black,
+    borderRadius: BorderRadius.circular(50),
+  );
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return WoiBaseButton(
+      onTap: () {
+        if (isDisabled) {
+          return;
+        }
+        onTap!();
+      },
+      buttonStyle: WoiButtonStyle(
+        backgroundColor: fillColor ?? buttonStyle.backgroundColor,
+        text: text,
+        height: heigth,
+        width: width,
+        boxShadow: boxShadowList,
+        textStyle: textStyle,
+        border: Border.all(
+          color: borderColor ?? Colors.black,
+          width: borderWidth,
+        ),
+      ),
+    );
+    /* InkWell(
       onTap: isDisabled ? null : onTap,
       child: Container(
         decoration: BoxDecoration(
@@ -47,9 +79,9 @@ class WoiCapsuleButton extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ); */
   }
-
+/* 
   Widget _textContainer() {
     return Text(
       text!,
@@ -62,5 +94,5 @@ class WoiCapsuleButton extends StatelessWidget {
           ),
       textAlign: TextAlign.center,
     );
-  }
+  } */
 }

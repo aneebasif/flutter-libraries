@@ -23,17 +23,17 @@ class MyApp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //----------Capsule Button-------------
-            WoiCapsuleIconButton(
+            WoiCapsuleButton(
               onTap: () {},
               width: 300,
-              icon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
+              text: 'Hello There!!!',
+              borderColor: Colors.blue,
+              fillColor: Colors.black,
+              borderWidth: 4,
+              heigth: 50,
+              textStyle: const TextStyle(
+                color: Colors.white,
               ),
-              text: 'Hellow There!!!',
             ),
             WoiCapsuleGradientButton(
               onTap: () {},

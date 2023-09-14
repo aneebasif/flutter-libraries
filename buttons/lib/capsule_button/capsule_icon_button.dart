@@ -17,6 +17,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
     this.iconLocation = WidgetLocation.start,
     this.boxShadowList,
     this.borderWidth = 1,
+    this.isDisabled = false,
   }) : super(key: key);
   final String? text;
   final VoidCallback? onTap;
@@ -29,6 +30,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
   final Widget icon;
   final List<BoxShadow>? boxShadowList;
   final Color disabledColor = const Color(0xffD9D9D9);
+  final bool isDisabled;
   final double borderWidth;
 
   final WoiButtonStyle buttonStyle = WoiButtonStyle(
@@ -43,6 +45,9 @@ class WoiCapsuleIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return WoiBaseButton(
       onTap: () {
+        if (isDisabled) {
+          return;
+        }
         onTap!();
       },
       buttonStyle: WoiButtonStyle(

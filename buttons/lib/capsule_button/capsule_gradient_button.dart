@@ -15,6 +15,7 @@ class WoiCapsuleGradientButton extends StatelessWidget {
     this.boxShadowList,
     required this.gradient,
     this.borderWidth = 1,
+    this.isDisabled = false,
   }) : super(key: key);
   final String? text;
   final VoidCallback? onTap;
@@ -26,11 +27,15 @@ class WoiCapsuleGradientButton extends StatelessWidget {
   final List<BoxShadow>? boxShadowList;
   final Color disabledColor = const Color(0xffD9D9D9);
   final double borderWidth;
+  final bool isDisabled;
 
   @override
   Widget build(BuildContext context) {
     return WoiBaseButton(
       onTap: () {
+        if (isDisabled) {
+          return;
+        }
         onTap!();
       },
       buttonStyle: WoiButtonStyle(
