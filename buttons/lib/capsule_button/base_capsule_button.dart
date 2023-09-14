@@ -24,7 +24,6 @@ class WoiBaseButton extends StatelessWidget {
   final Color? fillColor;
   final double? width;
   final bool isDisabled;
-  final Color disabledColor = const Color(0xffD9D9D9);
   final List<BoxShadow>? boxShadowList;
   final WoiButtonStyle? buttonStyle;
 
@@ -39,7 +38,7 @@ class WoiBaseButton extends StatelessWidget {
               buttonStyle?.borderRadius ?? BorderRadius.circular(borderRadius),
           border: buttonStyle?.border ??
               Border.all(
-                color: isDisabled ? disabledColor : borderColor ?? Colors.black,
+                color: borderColor ?? Colors.black,
               ),
           gradient: buttonStyle?.gradient,
           boxShadow: buttonStyle?.boxShadow ?? boxShadowList,

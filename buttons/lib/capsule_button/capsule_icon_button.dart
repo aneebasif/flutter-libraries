@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weoveri_button/capsule_button/woi_button_style.dart';
-import 'package:weoveri_button/main.dart';
+
+import '../enums.dart';
+import 'base_capsule_button.dart';
 
 /// An all in one capsule button
 class WoiCapsuleIconButton extends StatelessWidget {
