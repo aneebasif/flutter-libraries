@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum IconLocation { start, end }
+import '../enums.dart';
 
 /// An all in one capsule button
 class WoiCapsuleIconButton extends StatelessWidget {
@@ -15,7 +15,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
     this.width,
     this.fillColor,
     this.isDisabled = false,
-    this.iconLocation = IconLocation.start,
+    this.iconLocation = WidgetLocation.start,
     this.boxShadowList,
   }) : super(key: key);
   final String? text;
@@ -26,7 +26,7 @@ class WoiCapsuleIconButton extends StatelessWidget {
   final Color? fillColor;
   final double? width;
   final bool isDisabled;
-  final IconLocation iconLocation;
+  final WidgetLocation iconLocation;
   final Widget icon;
   final List<BoxShadow>? boxShadowList;
   final Color disabledColor = const Color(0xffD9D9D9);
@@ -49,9 +49,9 @@ class WoiCapsuleIconButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            iconLocation == IconLocation.start ? icon : Container(),
+            iconLocation == WidgetLocation.start ? icon : Container(),
             _textContainer(),
-            iconLocation == IconLocation.end ? icon : Container(),
+            iconLocation == WidgetLocation.end ? icon : Container(),
           ],
         ),
       ),
