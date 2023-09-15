@@ -3,17 +3,12 @@
 
 ## Getting started
 
-Import the plugin and call the `WoiCapsuleButton` and you are good to go... 🎉
+Import the plugin and call the `WOITextButton` and you are good to go... 🎉
 
 Here are the list of all of the buttons present in the package:
-### Capsule Buttons
-`WoiCapsuleIconButton`
-
-`WoiCapsuleGradientButton`
-
-`WoiCapsuleLoadingButton`
-
-`WoiBaseButton`
+### Buttons
+- [WOITextButton](lib/buttons/text_button.dart)
+- [WOIIconButton](lib/buttons/icon_button.dart)
 
 
 
@@ -28,21 +23,21 @@ import 'package:weoveri_button/main.dart';
 
 ## Usage
 
-As simple as using a TextButton widget just call the `WoiCapsuleButton`.
+As simple as using a TextButton widget just call the `WOITextButton`.
 
-Although `text` and `onTap` is required to show the inital text of the button and tap action.
+Although `text` is required to show the inital text of the button.
 
 
 ```dart
-WoiCapsuleButton(
+WOITextButton(
     text: 'Confirm',
-    onTap: () {},
+    onTap: () {}, // Optional
 )
 ```
 
 |Parameter|Description|
 |-----------------------------------|--------------------------------------|
-|textStyle   |is used to provide textStyle for the text used in button|
+|buttonStyle   |is used to provide button style for the button|
 |borderColor    |By default the border color is black|
 |backgroundColor      |The default value is black|
 |borderRadius |Option to change the border radius, default value is 50|
