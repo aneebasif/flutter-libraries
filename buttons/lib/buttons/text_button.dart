@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weoveri_button/utils/woi_button_style.dart';
+import '../utils/enums.dart';
 
-import '../enums.dart';
-
-/// The all in one button
 class WoiTextButton extends StatelessWidget {
+  /// The all in one button
   const WoiTextButton({
     Key? key,
     this.onTap,
