@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Capsule Buttons'),
+          title: const Text('Buttons'),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
