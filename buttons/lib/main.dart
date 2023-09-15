@@ -2,8 +2,9 @@ library weoveri_button;
 
 // Text Button
 export 'buttons/text_button.dart';
+export 'buttons/icon_button.dart';
 
-// Text Button
+// Utils
 export 'utils/woi_button_style.dart';
 
 // Parallalogram Button
@@ -12,4 +13,4 @@ export 'parallalogram_button/icon_parallalogram_button.dart';
 export 'parallalogram_button/loading_parallalogram_button.dart';
 
 // Parallalogram Button
-export 'enums.dart';
+export 'utils/enums.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weoveri_button/enums.dart';
 import 'package:weoveri_button/parallalogram_button/parallalogram_painter.dart';
+
+import '../utils/enums.dart';
 
 /// A button that is tilt from sides and accept a `Text` and `icon` in the center
 /// `Icons` can be in prefix and sufix
