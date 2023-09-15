@@ -134,6 +134,22 @@ class MyApp extends StatelessWidget {
                 ),
               ],
             ),
+
+            //----------Icon Button-------------
+            WOIIconButton(
+              size: 45,
+              borderRadius: BorderRadius.circular(100),
+              backgroundColor: Colors.black,
+              border: Border.all(
+                color: Colors.red,
+                width: 3,
+              ),
+              child: const Icon(
+                Icons.percent,
+                color: Colors.white,
+              ),
+              onTap: () {},
+            ),
           ],
         ),
       ),
