@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weoveri_button/capsule_button/woi_button_style.dart';
 import 'package:weoveri_button/main.dart';
 
 void main() {
@@ -24,63 +23,100 @@ class MyApp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //----------Capsule Button-------------
-            WoiBaseButton(
-              buttonStyle: WoiButtonStyle(
-                circularProgressIndicator: const CircularProgressIndicator(),
-                progressIndicatorheight: 15,
-                // widgetLocation: WidgetLocation.end,
-                text: 'Submit'.toUpperCase(),
-                textStyle: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
+            SizedBox(
+              width: 250,
+              child: WoiTextButton(
+                buttonStyle: WoiButtonStyle(
+                  sideWidget: const CircularProgressIndicator(),
+                  sideWidgetSize: 20,
+                  text: 'Submit'.toUpperCase(),
+                  textMargin: const EdgeInsets.only(
+                    left: 8,
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-            WoiCapsuleButton(
+            WoiTextButton(
               onTap: () {},
               width: 300,
-              text: 'Hello There!!!',
+              buttonStyle: WoiButtonStyle(
+                text: 'Hello There!!!',
+                border: Border.all(
+                  width: 4,
+                ),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               borderColor: Colors.blue,
               fillColor: Colors.black,
-              borderWidth: 4,
               heigth: 50,
-              textStyle: const TextStyle(
-                color: Colors.white,
-              ),
             ),
-            WoiCapsuleGradientButton(
+            WoiTextButton(
               onTap: () {},
-              text: 'Hello There!!!',
-              textStyle: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+              buttonStyle: WoiButtonStyle(
+                text: 'Hello There!!!',
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                gradient: const LinearGradient(
+                  colors: [
+                    Colors.black,
+                    Colors.green,
+                    Colors.blue,
+                    Colors.orange,
+                    Colors.black,
+                  ],
+                ),
               ),
               width: 300,
-              gradient: const LinearGradient(
-                colors: [
-                  Colors.black,
-                  Colors.green,
-                  Colors.blue,
-                  Colors.orange,
-                  Colors.black,
-                ],
-              ),
             ),
-            WoiCapsuleIconButton(
-              text: 'Icon button'.toUpperCase(),
+            WoiTextButton(
               onTap: () {},
-              icon: const Padding(
-                padding: EdgeInsets.only(
-                  right: 8.0,
+              buttonStyle: WoiButtonStyle(
+                text: 'Icon button'.toUpperCase(),
+                sideWidget: const Padding(
+                  padding: EdgeInsets.only(
+                    right: 8.0,
+                  ),
+                  child: Icon(
+                    Icons.add_link,
+                    color: Colors.white,
+                  ),
                 ),
-                child: Icon(
-                  Icons.add_link,
-                  color: Colors.white,
-                ),
+                widgetLocation: WidgetLocation.start,
               ),
-              iconLocation: WidgetLocation.start,
               width: 200,
             ),
+            WoiTextButton(
+              onTap: () {},
+              buttonStyle: WoiButtonStyle(
+                text: 'Icon button'.toUpperCase(),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                borderRadius: BorderRadius.zero,
+                border: Border.all(
+                  color: Colors.red,
+                  width: 5,
+                ),
+                gradient: const LinearGradient(
+                  colors: [
+                    Colors.blue,
+                    Colors.green,
+                  ],
+                ),
+                backgroundColor: Colors.blue,
+              ),
+              width: 200,
+            ),
+
             //----------Parallalogram Button-------------
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

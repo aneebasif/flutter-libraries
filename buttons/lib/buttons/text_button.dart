@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weoveri_button/capsule_button/woi_button_style.dart';
+import 'package:weoveri_button/utils/woi_button_style.dart';
 
 import '../enums.dart';
 
