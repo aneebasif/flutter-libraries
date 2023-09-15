@@ -15,6 +15,7 @@ class WoiTextButton extends StatelessWidget {
     this.isDisabled = false,
     this.boxShadowList,
     this.buttonStyle,
+    this.text = '',
   }) : super(key: key);
   final double borderRadius;
   final VoidCallback? onTap;
@@ -25,6 +26,7 @@ class WoiTextButton extends StatelessWidget {
   final bool isDisabled;
   final List<BoxShadow>? boxShadowList;
   final WoiButtonStyle? buttonStyle;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +59,17 @@ class WoiTextButton extends StatelessWidget {
   }
 
   Widget _textContainer() {
-    if (buttonStyle?.text == null) {
+    if (text == '') {
       return Container();
     }
     return Container(
       margin: buttonStyle?.textMargin,
       child: Text(
-        buttonStyle?.text ?? '',
+        text,
         overflow: TextOverflow.ellipsis,
         style: buttonStyle?.textStyle ??
             const TextStyle(
-              height: 1,
               color: Colors.white,
-              fontSize: 11,
             ),
         textAlign: TextAlign.center,
       ),

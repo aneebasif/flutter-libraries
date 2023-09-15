@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
             SizedBox(
               width: 250,
               child: WoiTextButton(
+                text: 'Submit'.toUpperCase(),
                 buttonStyle: WoiButtonStyle(
                   sideWidget: const CircularProgressIndicator(),
                   sideWidgetSize: 20,
-                  text: 'Submit'.toUpperCase(),
                   textMargin: const EdgeInsets.only(
                     left: 8,
                   ),
@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
             WoiTextButton(
               onTap: () {},
               width: 300,
+              text: 'Hello There!!!',
               buttonStyle: WoiButtonStyle(
-                text: 'Hello There!!!',
                 border: Border.all(
                   width: 4,
                 ),
@@ -58,8 +58,8 @@ class MyApp extends StatelessWidget {
             ),
             WoiTextButton(
               onTap: () {},
+              text: 'Hello There!!!',
               buttonStyle: WoiButtonStyle(
-                text: 'Hello There!!!',
                 textStyle: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -78,8 +78,8 @@ class MyApp extends StatelessWidget {
             ),
             WoiTextButton(
               onTap: () {},
+              text: 'Icon button'.toUpperCase(),
               buttonStyle: WoiButtonStyle(
-                text: 'Icon button'.toUpperCase(),
                 sideWidget: const Padding(
                   padding: EdgeInsets.only(
                     right: 8.0,
@@ -95,8 +95,8 @@ class MyApp extends StatelessWidget {
             ),
             WoiTextButton(
               onTap: () {},
+              text: 'Icon button'.toUpperCase(),
               buttonStyle: WoiButtonStyle(
-                text: 'Icon button'.toUpperCase(),
                 textStyle: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

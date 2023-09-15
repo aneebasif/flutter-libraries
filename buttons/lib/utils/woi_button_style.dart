@@ -8,7 +8,6 @@ class WoiButtonStyle {
   Widget? sideWidget;
   double? sideWidgetSize;
   WidgetLocation widgetLocation;
-  String? text;
   Color? backgroundColor;
   List<BoxShadow>? boxShadow;
   Gradient? gradient;
@@ -22,7 +21,6 @@ class WoiButtonStyle {
     this.sideWidget,
     this.sideWidgetSize,
     this.widgetLocation = WidgetLocation.start,
-    this.text,
     this.backgroundColor,
     this.boxShadow,
     this.gradient,
