@@ -14,7 +14,7 @@ class ToggleButton extends StatefulWidget {
     this.toggleThumbColor = Colors.black87,
     this.toggleTrackColor = Colors.white54,
     this.titleTextStyle = const TextStyle(fontSize: 13, color: Colors.white),
-    this.labelTextStyle = const TextStyle(fontSize: 13, color: Colors.white),
+    this.labelTextStyle = const TextStyle(fontSize: 10, color: Colors.white),
     this.contentPadding =
         const EdgeInsets.symmetric(horizontal: 25, vertical: 6),
     this.borderRadius = 0,
@@ -46,10 +46,7 @@ class _ToggleButtonState extends State<ToggleButton> {
           title: Text(widget.title, style: widget.titleTextStyle),
           subtitle: widget.label == null
               ? null
-              : Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(widget.label!, style: widget.labelTextStyle),
-                ),
+              : Text(widget.label!, style: widget.labelTextStyle),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),
           ),
