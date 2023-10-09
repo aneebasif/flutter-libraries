@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
-// A custom painter for ractangle shaped container with tilted sides
-class MyParallelogram extends CustomPainter {
+/// A custom painter for ractangle shaped container with tilted sides
+/// This painter will be used as a child for the `ParallelogramButton`
+class WOIParallelogramPainter extends CustomPainter {
   final double borderWidth;
   final Color buttonColor;
   final Color borderColor;
   final double tilt;
+  final Gradient? gradient;
 
-  MyParallelogram({
+  WOIParallelogramPainter({
     this.borderWidth = 1,
     this.buttonColor = Colors.white,
     this.tilt = 10,
     this.borderColor = Colors.white,
+    this.gradient,
   });
   @override
   void paint(Canvas canvas, Size size) {
@@ -35,6 +38,16 @@ class MyParallelogram extends CustomPainter {
       ..color = buttonColor
       ..style = PaintingStyle.fill
       ..strokeWidth = 0;
+
+    if (gradient != null) {
+      paint_1 = paint_1
+        ..shader = gradient!.createShader(
+          Rect.fromPoints(
+            Offset(0, size.height / 2),
+            Offset(size.width, size.height / 2),
+          ),
+        );
+    }
 
     Path path_1 = Path();
     path_1.moveTo(tilt, 0);

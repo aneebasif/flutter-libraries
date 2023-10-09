@@ -1,13 +1,14 @@
-name: weoveri_button
-description: A button package containing all of the WEOI buttons.
-version: 0.0.1
-# homepage: ''
+name: weoveri_flutter_widgets
+description: The We Over I Flutter Widgets package is a comprehensive library of everyday-use widgets for Flutter users.
+version: 0.0.6
+homepage: "https://github.com/We-Over-I-Engineering/flutter-libraries/tree/main/widgets"
 
 environment:
   sdk: ">=3.0.6 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
+  dartdoc: ^6.3.0
   flutter:
     sdk: flutter
 
