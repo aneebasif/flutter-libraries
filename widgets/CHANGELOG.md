@@ -18,3 +18,6 @@
 
 ## ^0.0.6
 * Updated and improved documentation.
+
+## ^0.0.7
+* There is an addition of Text field widget with updated documentation including images for the code snippet.
