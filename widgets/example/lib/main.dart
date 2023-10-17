@@ -43,8 +43,13 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               child: WOITextButton(
                 text: 'Submit'.toUpperCase(),
                 buttonStyle: WOIButtonStyle(
-                  sideWidget: const CircularProgressIndicator(),
-                  sideWidgetSize: 20,
+                  prefixWidget: const SizedBox(
+                    child: Icon(
+                      Icons.link,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
                   textMargin: const EdgeInsets.only(
                     left: 8,
                   ),
@@ -132,7 +137,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               ],
             ),
 
-            //----------Radio Buttons-------------//
+            //----------CheckBox-------------//
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -144,6 +149,32 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                   },
                 ),
               ],
+            ),
+
+            //----------Text Field-------------//
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: WOITextField(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xff007EDA),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(6),
+                  ),
+                ),
+                labelText: 'Email Address',
+                helperText: 'Make sure it is valid',
+                hintText: 'Placeholder Text',
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: Color(0xff007EDA),
+                ),
+                hintTextStyle: TextStyle(
+                  color: Color(0xffB6A8A8),
+                  fontSize: 18,
+                ),
+              ),
             ),
           ],
         ),
