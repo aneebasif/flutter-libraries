@@ -1,5 +1,5 @@
 /// A library for buttons
-/// That include Text button, Parallalogram Button and Icon Button with all of thier variations
+/// That include Text button, Parallalogram Button and Icon Button
 ///
 
 library buttons;
