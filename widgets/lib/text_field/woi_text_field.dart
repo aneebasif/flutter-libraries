@@ -6,12 +6,15 @@ import 'package:weoveri_flutter_widgets/text_field/woi_text_field_style.dart';
 /// A text field following material design
 ///
 /// Here is the simple version that can be used:
+/// <div style="font-family: Arial, sans-serif; background-color: #d7ebfc; padding: 20px; border-radius: 0px; /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */ width: 100%; margin: 40px auto;">
+///     <p>
 /// All of the fields in the widget are optional so by default it will only show a textfield
-/// with bit rounded corners without reflecting any information.
+/// with bit rounded corners without reflecting any information.</p>
+///     <img src="https://github.com/We-Over-I-Engineering/flutter-libraries/assets/85175211/d22f4d57-b3f6-4df1-a000-9154ca54be0a" alt="Text Field" style="width: 100%; max-width: 400px; display: block; margin: 20px 0;">
+///     <div style="background-color: #f5f5f5; padding: 10px; border-radius: 0px; font-family: 'Courier New', Courier, monospace;">
 ///
-///
-///```dart
-///WOITextField(
+/// <pre class="language-{{language}}" id="sample-code"><code class="language-{{language}}">
+/// WOITextField(
 ///   border: OutlineInputBorder(
 ///     borderSide: BorderSide(
 ///       color: Color(0xff007EDA),
@@ -32,14 +35,10 @@ import 'package:weoveri_flutter_widgets/text_field/woi_text_field_style.dart';
 ///     fontSize: 18,
 ///   ),
 /// ),
-/// ```
+/// </code></pre>
 ///
-///---
-/// Here is how that would look with the above code
-///
-///![Simple version of WOITextField](https://github.com/We-Over-I-Engineering/flutter-libraries/assets/85175211/d22f4d57-b3f6-4df1-a000-9154ca54be0a)
-///
-///
+///  </div>
+/// </div>
 ///
 ///---
 /// In the Widget there would be 5 types of states that can be changed based on the enum [TextFieldState],
