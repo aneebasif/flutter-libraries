@@ -214,134 +214,101 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
         ),
         //----------Steppers-------------//
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: WOIHorizontalTextIconStepper(
-            activeStateIndex: currentStepperIndex,
-            completedState: HorizontalTextIconStepperStyle(
-              textStyle: const TextStyle(
-                color: Colors.black,
-              ),
-              sufixWidget: Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  shape: BoxShape.circle,
-                  color: Colors.black,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.check,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            inactiveState: HorizontalTextIconStepperStyle(
-              textStyle: const TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-            activeState: HorizontalTextIconStepperStyle(
-              textStyle: const TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            textItemsList: const [
-              '',
-              '',
-              '',
-            ],
-            sufixWidgetItemsList: [
-              SufixWidgetStepper(
-                widget: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.home,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                activeState: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.home,
-                    ),
-                  ),
-                ),
-              ),
-              SufixWidgetStepper(
-                widget: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.person,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                activeState: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.person,
-                    ),
-                  ),
-                ),
-              ),
-              SufixWidgetStepper(
-                widget: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.location_on,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-            saperatorsPadding: const EdgeInsets.symmetric(
-              horizontal: 5,
-            ),
-            activeSeparatorWidget: Container(
-              height: 3,
+        stepperWidget(),
+        stepperButtons(),
+      ],
+    );
+  }
+
+  Widget stepperWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: WOIHorizontalTextIconStepper(
+        activeStateIndex: currentStepperIndex,
+        textItemsList: [
+          'Text 1',
+          'Text 2',
+        ],
+      ),
+      /* WOIHorizontalTextIconStepper.counterText(
+        textItemsList: const [
+          'User info',
+          'Account info',
+          'Review',
+        ],
+        subtextList: const [
+          'Details here',
+          'Details here',
+          'Details here',
+        ],
+        subtextStyle: const TextStyle(
+          fontSize: 11,
+        ),
+        textStyle: const TextStyle(
+          fontSize: 13,
+        ),
+        counterTextStyle: const TextStyle(
+          fontSize: 14,
+        ),
+        activeStateIndex: currentStepperIndex,
+        inactiveColor: Colors.grey,
+        activeColor: Colors.black,
+        completedColor: Colors.black,
+      ), */
+      /* WOIHorizontalTextIconStepper.icons(
+        activeStateIndex: currentStepperIndex,
+        iconData: const [
+          Icons.home,
+          Icons.person,
+          Icons.close,
+        ],
+      ), */
+      /* WOIHorizontalTextIconStepper.icons(
+        activeStateIndex: currentStepperIndex,
+        backgroundDecorator: BoxDecoration(
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        iconData: const [
+          Icons.home,
+          Icons.person,
+          Icons.close,
+        ],
+        inactiveSeparatorWidget: Container(
+          height: 2,
+          color: Colors.grey,
+        ),
+        activeSeparatorWidget: Container(
+          height: 2,
+          color: Colors.black,
+        ),
+        inactiveIconTheme: IconStepperItemStyle(
+          iconThemeData: const IconThemeData(
+            color: Colors.grey,
+          ),
+        ),
+        activeIconTheme: IconStepperItemStyle(
+          iconThemeData: const IconThemeData(
+            color: Colors.black,
+          ),
+          boxDecoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
               color: Colors.black,
-            ),
-            inactiveSeparatorWidget: Container(
-              height: 3,
-              color: Colors.grey.shade300,
             ),
           ),
         ),
-
-        stepperButtons(),
-      ],
+        completedIconTheme: IconStepperItemStyle(
+          iconThemeData: const IconThemeData(
+            color: Colors.white,
+          ),
+          boxDecoration: const BoxDecoration(
+            color: Colors.black,
+            shape: BoxShape.circle,
+          ),
+        ),
+        itemsPadding: const EdgeInsets.all(15),
+      ), */
     );
   }
 
