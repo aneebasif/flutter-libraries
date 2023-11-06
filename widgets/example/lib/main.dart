@@ -225,7 +225,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       padding: const EdgeInsets.all(20),
       child: WOIHorizontalTextIconStepper(
         activeStateIndex: currentStepperIndex,
-        textItemsList: [
+        textItemsList: const [
           'Text 1',
           'Text 2',
         ],
