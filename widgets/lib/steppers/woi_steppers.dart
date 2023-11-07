@@ -256,6 +256,71 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
         subtextList = null,
         subtextStyle = null;
 
+  WOIHorizontalTextIconStepper.iconText({
+    super.key,
+    required this.textItemsList,
+    this.activeSeparatorWidget,
+    this.inactiveSeparatorWidget,
+    required this.activeStateIndex,
+    this.itemsPadding,
+    this.saperatorsPadding,
+    this.backgroundPadding,
+    this.backgroundDecorator,
+    this.itemsMargin,
+    List<Icon>? iconList,
+    EdgeInsets? counterPadding,
+    EdgeInsets? counterMargin,
+    Color? activeColor,
+    Color? completedColor,
+    Color? inactiveColor,
+    Widget? completedIcon,
+    Widget? activeIcon,
+    Widget? inactiveIcon,
+    TextStyle? textStyle,
+  })  : assert(textItemsList.length > 1,
+            '[textItemsList] length should be greater then 1'),
+        assert(
+            iconList == null ||
+                ((iconList.length == textItemsList.length) || iconList.isEmpty),
+            '\n[iconData] length should be equal to [textItemsList]'),
+        subtextList = null,
+        subtextStyle = null,
+        sufixWidgetItemsList = List.generate(
+          textItemsList.length,
+          (index) => SufixWidgetStepper(
+            widget: iconList != null ? iconList[index] : const SizedBox(),
+            inactiveState: inactiveIcon,
+            activeState: activeIcon ??
+                const Icon(
+                  Icons.check_circle,
+                  color: Colors.black,
+                ),
+            completedState: completedIcon ??
+                const Icon(
+                  Icons.check_circle,
+                  color: Colors.black,
+                ),
+          ),
+        ),
+        inactiveState = HorizontalTextIconStepperStyle(
+          textStyle: (textStyle ?? const TextStyle()).copyWith(
+            color: inactiveColor,
+          ),
+        ),
+        activeState = HorizontalTextIconStepperStyle(
+          textStyle: (textStyle ?? const TextStyle()).copyWith(
+            color: activeColor,
+          ),
+        ),
+        completedState = HorizontalTextIconStepperStyle(
+          textStyle: (textStyle ?? const TextStyle()).copyWith(
+            color: completedColor,
+          ),
+        ),
+        itemActiveDecorator = null,
+        itemInactiveDecorator = null,
+        itemCompletedDecorator = null;
+
   @override
   State<WOIHorizontalTextIconStepper> createState() =>
       _WOIHorizontalTextIconStepperState();
@@ -317,7 +382,10 @@ class _WOIHorizontalTextIconStepperState
   /// Stepper Item Widget that returns the Text and optional Sufix widget
   Widget stepItem(int index) {
     String text = widget.textItemsList[index];
-    String subText = widget.subtextList?[index] ?? '';
+    String subText = '';
+    if (widget.subtextList != null) {
+      subText = widget.subtextList?[index] ?? '';
+    }
     TextStyle textStyle = widget.inactiveState?.textStyle ?? // Inactive State
         const TextStyle(
           color: Colors.grey,

@@ -223,13 +223,50 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   Widget stepperWidget() {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: WOIHorizontalTextIconStepper(
+      child: WOIHorizontalTextIconStepper.iconText(
+        textItemsList: const [
+          'Personal Info',
+          'Account Info',
+          'Review',
+        ],
+        activeStateIndex: currentStepperIndex,
+      ),
+      /* WOIHorizontalTextIconStepper.iconText(
         activeStateIndex: currentStepperIndex,
         textItemsList: const [
-          'Text 1',
-          'Text 2',
+          'Personal Info',
+          'Account Info',
+          'Review',
         ],
-      ),
+        iconList: const [
+          Icon(
+            Icons.dangerous,
+            color: Colors.grey,
+          ),
+          Icon(
+            Icons.g_translate_outlined,
+            color: Colors.grey,
+          ),
+          Icon(
+            Icons.ramen_dining,
+            color: Colors.grey,
+          ),
+        ],
+        completedColor: Colors.black,
+        inactiveColor: Colors.grey,
+        activeColor: Colors.black,
+        textStyle: const TextStyle(
+          fontSize: 12,
+        ),
+        activeSeparatorWidget: Container(
+          height: 2,
+          color: Colors.black,
+        ),
+        inactiveSeparatorWidget: Container(
+          height: 2,
+          color: Colors.grey,
+        ),
+      ), */
       /* WOIHorizontalTextIconStepper.counterText(
         textItemsList: const [
           'User info',
