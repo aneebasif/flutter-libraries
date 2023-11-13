@@ -15,8 +15,8 @@ class IconStepperItemStyle {
   });
 }
 
-class WOIHorizontalTextIconStepper extends StatefulWidget {
-  const WOIHorizontalTextIconStepper({
+class WOIStepper extends StatefulWidget {
+  const WOIStepper({
     super.key,
     this.completedState,
     this.activeState,
@@ -42,9 +42,9 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
           "\n\n\"Sufix widgets lenght is not equal to Text items\"\n\n",
         );
 
-  final HorizontalTextIconStepperStyle? completedState;
-  final HorizontalTextIconStepperStyle? activeState;
-  final HorizontalTextIconStepperStyle? inactiveState;
+  final StepperStyle? completedState;
+  final StepperStyle? activeState;
+  final StepperStyle? inactiveState;
   final List<String> textItemsList;
   final List<SufixWidgetStepper>? sufixWidgetItemsList;
   final Widget? activeSeparatorWidget;
@@ -61,7 +61,7 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
   final List<String>? subtextList;
   final TextStyle? subtextStyle;
 
-  WOIHorizontalTextIconStepper.counterText({
+  WOIStepper.counterText({
     super.key,
     required this.textItemsList,
     this.activeSeparatorWidget,
@@ -161,17 +161,17 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
             ),
           ),
         ),
-        inactiveState = HorizontalTextIconStepperStyle(
+        inactiveState = StepperStyle(
           textStyle: (textStyle ?? const TextStyle()).copyWith(
             color: inactiveColor,
           ),
         ),
-        activeState = HorizontalTextIconStepperStyle(
+        activeState = StepperStyle(
           textStyle: (textStyle ?? const TextStyle()).copyWith(
             color: activeColor,
           ),
         ),
-        completedState = HorizontalTextIconStepperStyle(
+        completedState = StepperStyle(
           textStyle: (textStyle ?? const TextStyle()).copyWith(
             color: completedColor,
           ),
@@ -180,7 +180,7 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
         itemInactiveDecorator = null,
         itemCompletedDecorator = null;
 
-  WOIHorizontalTextIconStepper.icons({
+  WOIStepper.icons({
     super.key,
     this.activeSeparatorWidget,
     this.inactiveSeparatorWidget,
@@ -256,7 +256,7 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
         subtextList = null,
         subtextStyle = null;
 
-  WOIHorizontalTextIconStepper.iconText({
+  WOIStepper.iconText({
     super.key,
     required this.textItemsList,
     this.activeSeparatorWidget,
@@ -302,17 +302,17 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
                 ),
           ),
         ),
-        inactiveState = HorizontalTextIconStepperStyle(
+        inactiveState = StepperStyle(
           textStyle: (textStyle ?? const TextStyle()).copyWith(
             color: inactiveColor,
           ),
         ),
-        activeState = HorizontalTextIconStepperStyle(
+        activeState = StepperStyle(
           textStyle: (textStyle ?? const TextStyle()).copyWith(
             color: activeColor,
           ),
         ),
-        completedState = HorizontalTextIconStepperStyle(
+        completedState = StepperStyle(
           textStyle: (textStyle ?? const TextStyle()).copyWith(
             color: completedColor,
           ),
@@ -322,12 +322,10 @@ class WOIHorizontalTextIconStepper extends StatefulWidget {
         itemCompletedDecorator = null;
 
   @override
-  State<WOIHorizontalTextIconStepper> createState() =>
-      _WOIHorizontalTextIconStepperState();
+  State<WOIStepper> createState() => _WOIStepperState();
 }
 
-class _WOIHorizontalTextIconStepperState
-    extends State<WOIHorizontalTextIconStepper> {
+class _WOIStepperState extends State<WOIStepper> {
   @override
   Widget build(BuildContext context) {
     return

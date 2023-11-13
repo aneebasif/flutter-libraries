@@ -223,7 +223,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   Widget stepperWidget() {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: WOIHorizontalTextIconStepper.iconText(
+      child: WOIStepper.iconText(
         textItemsList: const [
           'Personal Info',
           'Account Info',

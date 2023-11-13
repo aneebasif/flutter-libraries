@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class HorizontalTextIconStepperStyle {
+class StepperStyle {
   TextStyle textStyle;
   Widget? sufixWidget;
-  HorizontalTextIconStepperStyle({
+  StepperStyle({
     required this.textStyle,
     this.sufixWidget,
   });
