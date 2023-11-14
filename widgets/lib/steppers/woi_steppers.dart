@@ -16,7 +16,29 @@ class IconStepperItemStyle {
 }
 
 class WOIStepper extends StatefulWidget {
-  const WOIStepper({
+  final StepperStyle? completedState;
+  final StepperStyle? activeState;
+  final StepperStyle? inactiveState;
+  final List<String> textItemsList;
+  final List<SufixWidgetStepper>? sufixWidgetItemsList;
+  final Widget? activeSeparatorWidget;
+  final Widget? inactiveSeparatorWidget;
+  final int activeStateIndex;
+  final EdgeInsets? itemsPadding;
+  final EdgeInsets? saperatorsPadding;
+  final EdgeInsets? backgroundPadding;
+  final BoxDecoration? backgroundDecorator;
+  final EdgeInsets? itemsMargin;
+  final BoxDecoration? itemActiveDecorator;
+  final BoxDecoration? itemInactiveDecorator;
+  final BoxDecoration? itemCompletedDecorator;
+  final List<String>? subtextList;
+  final TextStyle? subtextStyle;
+  final Axis axis;
+  final double? height;
+  final double? width;
+
+  const WOIStepper.custom({
     super.key,
     this.completedState,
     this.activeState,
@@ -36,30 +58,14 @@ class WOIStepper extends StatefulWidget {
     this.itemCompletedDecorator,
     this.subtextList,
     this.subtextStyle,
+    this.axis = Axis.horizontal,
+    this.height,
+    this.width,
   }) : assert(
           (sufixWidgetItemsList == null) ||
               textItemsList.length == sufixWidgetItemsList.length,
           "\n\n\"Sufix widgets lenght is not equal to Text items\"\n\n",
         );
-
-  final StepperStyle? completedState;
-  final StepperStyle? activeState;
-  final StepperStyle? inactiveState;
-  final List<String> textItemsList;
-  final List<SufixWidgetStepper>? sufixWidgetItemsList;
-  final Widget? activeSeparatorWidget;
-  final Widget? inactiveSeparatorWidget;
-  final int activeStateIndex;
-  final EdgeInsets? itemsPadding;
-  final EdgeInsets? saperatorsPadding;
-  final EdgeInsets? backgroundPadding;
-  final BoxDecoration? backgroundDecorator;
-  final EdgeInsets? itemsMargin;
-  final BoxDecoration? itemActiveDecorator;
-  final BoxDecoration? itemInactiveDecorator;
-  final BoxDecoration? itemCompletedDecorator;
-  final List<String>? subtextList;
-  final TextStyle? subtextStyle;
 
   WOIStepper.counterText({
     super.key,
@@ -80,8 +86,10 @@ class WOIStepper extends StatefulWidget {
     this.subtextList,
     this.subtextStyle,
     TextStyle? textStyle,
-    TextStyle? subtextstyle,
     TextStyle? counterTextStyle,
+    this.axis = Axis.horizontal,
+    this.height,
+    this.width,
   })  : assert(textItemsList.length > 1,
             '[textItemsList] length should be greater then 1'),
         assert(
@@ -194,8 +202,10 @@ class WOIStepper extends StatefulWidget {
     this.saperatorsPadding,
     this.backgroundPadding,
     this.backgroundDecorator,
-    // activeDecorator
+    this.axis = Axis.horizontal,
     this.itemsMargin,
+    this.height,
+    this.width,
   })  : assert(
             iconData.length > 1, '[iconData] length should be greater then 1'),
         sufixWidgetItemsList = List.generate(
@@ -241,7 +251,6 @@ class WOIStepper extends StatefulWidget {
         itemCompletedDecorator = completedIconTheme?.boxDecoration ??
             BoxDecoration(
               shape: BoxShape.circle,
-              // color: Colors.black,
               border: Border.all(
                 color: Colors.black,
               ),
@@ -277,6 +286,9 @@ class WOIStepper extends StatefulWidget {
     Widget? activeIcon,
     Widget? inactiveIcon,
     TextStyle? textStyle,
+    this.axis = Axis.horizontal,
+    this.height,
+    this.width,
   })  : assert(textItemsList.length > 1,
             '[textItemsList] length should be greater then 1'),
         assert(
@@ -328,10 +340,9 @@ class WOIStepper extends StatefulWidget {
 class _WOIStepperState extends State<WOIStepper> {
   @override
   Widget build(BuildContext context) {
-    return
-        //
-        // ListView();
-        Container(
+    return Container(
+      height: widget.axis.index == Axis.vertical.index ? 200 : widget.height,
+      width: widget.width,
       padding: widget.backgroundPadding ?? const EdgeInsets.all(12),
       decoration: widget.backgroundDecorator ??
           BoxDecoration(
@@ -339,19 +350,33 @@ class _WOIStepperState extends State<WOIStepper> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
           ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(
-          _computeActualChildCount(widget.textItemsList.length),
-          (index) {
-            final int itemIndex = index ~/ 2;
-            if (index.isEven) {
-              return stepItem(itemIndex);
-            }
-            return separatorItem(itemIndex);
-          },
-        ),
-      ),
+      child: widget.axis.index == Axis.horizontal.index
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(
+                _computeActualChildCount(widget.textItemsList.length),
+                (index) {
+                  final int itemIndex = index ~/ 2;
+                  if (index.isEven) {
+                    return stepItem(itemIndex);
+                  }
+                  return separatorItem(itemIndex);
+                },
+              ),
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: List.generate(
+                _computeActualChildCount(widget.textItemsList.length),
+                (index) {
+                  final int itemIndex = index ~/ 2;
+                  if (index.isEven) {
+                    return stepItem(itemIndex);
+                  }
+                  return separatorItem(itemIndex);
+                },
+              ),
+            ),
     );
   }
 
@@ -424,26 +449,41 @@ class _WOIStepperState extends State<WOIStepper> {
       decoration: decoration,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           sufixWidget,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                text,
-                style: textStyle,
-              ),
-              subText.isEmpty
-                  ? const SizedBox()
-                  : Text(
-                      subText,
-                      style: (widget.subtextStyle ?? const TextStyle())
-                          .copyWith(color: textStyle.color),
-                    ),
-            ],
+          textWidget(
+            text,
+            textStyle,
+            subText,
           ),
         ],
       ),
+    );
+  }
+
+  Widget textWidget(
+    String text,
+    TextStyle textStyle,
+    String subText,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: textStyle,
+        ),
+        subText.isEmpty
+            ? const SizedBox()
+            : Text(
+                subText,
+                style: (widget.subtextStyle ?? const TextStyle()).copyWith(
+                  color: textStyle.color,
+                ),
+              ),
+      ],
     );
   }
 }

@@ -214,8 +214,12 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
         ),
         //----------Steppers-------------//
-        stepperWidget(),
-        stepperButtons(),
+        Column(
+          children: [
+            stepperWidget(),
+            stepperButtons(),
+          ],
+        ),
       ],
     );
   }
@@ -223,20 +227,26 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   Widget stepperWidget() {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: WOIStepper.iconText(
-        textItemsList: const [
-          'Personal Info',
-          'Account Info',
-          'Review',
-        ],
+      child: WOIStepper.icons(
         activeStateIndex: currentStepperIndex,
+        activeSeparatorWidget: Container(
+          height: 2,
+          color: Colors.black,
+        ),
+        iconData: const [
+          Icons.home,
+          Icons.person,
+          Icons.check_circle,
+        ],
       ),
     );
   }
 
   Widget stepperButtons() {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+      ),
       child: Row(
         children: [
           Expanded(
