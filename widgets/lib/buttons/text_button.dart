@@ -54,6 +54,7 @@ class WOITextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: isDisabled ? null : onTap,
+      borderRadius: buttonStyle?.borderRadius ?? BorderRadius.circular(50),
       child: Container(
         decoration: _boxDecorator(),
         height: heigth ?? 38,
