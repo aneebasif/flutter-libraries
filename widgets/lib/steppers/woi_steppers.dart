@@ -388,7 +388,6 @@ class _WOIStepperState extends State<WOIStepper> {
   /// The saperateor Item that would be inbetween the actual items
   Widget separatorItem(int index) {
     Widget saperator = Container();
-    // List list = widget.ac;
     Widget activeSaparator = widget.activeSeparatorWidget ?? saperator;
     Widget inactiveSaparator = widget.inactiveSeparatorWidget ?? saperator;
 
