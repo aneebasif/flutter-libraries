@@ -41,7 +41,7 @@ class WOITextButton extends StatelessWidget {
   final bool isDisabled;
 
   /// This provides multiple option to style your button
-  /// Furthure it gives you option to change add `Icons` as a prifix and sufix as well
+  /// Furthure it gives you option to change add `Icons` as a prifix and suffix as well
   final WOIButtonStyle? buttonStyle;
 
   /// Text String to be displayed
@@ -77,7 +77,7 @@ class WOITextButton extends StatelessWidget {
         /* (buttonStyle?.widgetLocation ?? WidgetLocation.start) ==
                 WidgetLocation.end
             ?  */
-        _sufixWidgets()
+        _suffixWidgets()
         /* : Container(), */
       ],
     );
@@ -123,10 +123,10 @@ class WOITextButton extends StatelessWidget {
     return Container();
   }
 
-  Widget _sufixWidgets() {
-    if (buttonStyle?.sufixWidget != null) {
+  Widget _suffixWidgets() {
+    if (buttonStyle?.suffixWidget != null) {
       return SizedBox(
-        child: buttonStyle!.sufixWidget!,
+        child: buttonStyle!.suffixWidget!,
       );
     }
     return Container();

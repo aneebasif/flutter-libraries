@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 /// You can change the styles for the items based on the states.
 class StepperStyle {
   TextStyle textStyle;
-  Widget? sufixWidget;
+  Widget? suffixWidget;
   StepperStyle({
     required this.textStyle,
-    this.sufixWidget,
+    this.suffixWidget,
   });
 }
 

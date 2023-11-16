@@ -58,7 +58,7 @@ import 'package:weoveri_flutter_widgets/steppers/steppers_model.dart';
 /// ```
 ///
 /// Moving on to the a variation that include the counters and text which is [WOIStepper.counterText].
-/// This provides the options to add counter widget as a sufix along with the text while providing the custumization for all states.
+/// This provides the options to add counter widget as a suffix along with the text while providing the custumization for all states.
 /// Here is a small example on how to use that:
 ///```dart
 /// Padding(
@@ -97,7 +97,7 @@ class WOIStepper extends StatefulWidget {
   final List<String> textItemsList;
 
   /// List of suffix widgets associated with each step in the stepper.
-  final List<SuffixWidgetStepper>? sufixWidgetItemsList;
+  final List<SuffixWidgetStepper>? suffixWidgetItemsList;
 
   /// Widget to be used as a separator for active steps.
   final Widget? activeSeparatorWidget;
@@ -169,7 +169,7 @@ class WOIStepper extends StatefulWidget {
     this.saperatorsPadding,
     this.backgroundPadding,
     this.backgroundDecorator,
-    this.sufixWidgetItemsList,
+    this.suffixWidgetItemsList,
     this.itemsMargin,
     this.itemActiveDecorator,
     this.itemInactiveDecorator,
@@ -181,12 +181,12 @@ class WOIStepper extends StatefulWidget {
     this.width,
     this.textPadding,
   }) : assert(
-          (sufixWidgetItemsList == null) ||
-              textItemsList.length == sufixWidgetItemsList.length,
+          (suffixWidgetItemsList == null) ||
+              textItemsList.length == suffixWidgetItemsList.length,
           "\n\n\"Sufix widgets lenght is not equal to Text items\"\n\n",
         );
 
-  /// Creates an instance of [WOIStepper] with counters as sufix widgets.
+  /// Creates an instance of [WOIStepper] with counters as suffix widgets.
   ///
   /// The [textStyle] defines the style of the counter text.
   /// The [counterTextStyle] defines the style of the counter text.
@@ -244,7 +244,7 @@ class WOIStepper extends StatefulWidget {
         assert(
             subtextList == null || (subtextList.length == textItemsList.length),
             '\n[subtextList] length should be equal to [textItemsList]'),
-        sufixWidgetItemsList = List.generate(
+        suffixWidgetItemsList = List.generate(
           textItemsList.length,
           (index) => SuffixWidgetStepper(
             widget: Container(
@@ -389,7 +389,7 @@ class WOIStepper extends StatefulWidget {
   })  : assert(
             iconData.length > 1, '[iconData] length should be greater then 1'),
         textPadding = null,
-        sufixWidgetItemsList = List.generate(
+        suffixWidgetItemsList = List.generate(
           iconData.length,
           (index) => SuffixWidgetStepper(
             widget: Icon(iconData[index]),
@@ -503,7 +503,7 @@ class WOIStepper extends StatefulWidget {
             '\n[iconData] length should be equal to [textItemsList]'),
         subtextList = null,
         subtextStyle = null,
-        sufixWidgetItemsList = List.generate(
+        suffixWidgetItemsList = List.generate(
           textItemsList.length,
           (index) => SuffixWidgetStepper(
             widget: iconList != null ? iconList[index] : const SizedBox(),
@@ -643,28 +643,28 @@ class _WOIStepperState extends State<WOIStepper> {
   Widget _getSufixWidget(int index) {
     // User-defined widget for inactive state or fallback to a default container.
 
-    Widget userWidget = widget.sufixWidgetItemsList?[index].inactiveState ??
-        widget.sufixWidgetItemsList?[index].widget ??
+    Widget userWidget = widget.suffixWidgetItemsList?[index].inactiveState ??
+        widget.suffixWidgetItemsList?[index].widget ??
         Container();
 
     // Default widget for inactive state or user-defined widget.
 
-    Widget sufixWidget = widget.inactiveState?.sufixWidget ?? userWidget;
+    Widget suffixWidget = widget.inactiveState?.suffixWidget ?? userWidget;
 
     if (index < widget.activeStateIndex) {
       // Completed State: Use the specified completed state widget or fallback to user-defined or default.
-      sufixWidget = widget.completedState?.sufixWidget ??
-          widget.sufixWidgetItemsList?[index].completedState ??
+      suffixWidget = widget.completedState?.suffixWidget ??
+          widget.suffixWidgetItemsList?[index].completedState ??
           userWidget;
     } else if (index == widget.activeStateIndex) {
       // Active State: Use the specified active state widget, user-defined, or fallback to completed state or default.
-      sufixWidget = widget.activeState?.sufixWidget ??
-          widget.sufixWidgetItemsList?[index].activeState ??
-          widget.completedState?.sufixWidget ??
+      suffixWidget = widget.activeState?.suffixWidget ??
+          widget.suffixWidgetItemsList?[index].activeState ??
+          widget.completedState?.suffixWidget ??
           userWidget;
     }
 
-    return sufixWidget;
+    return suffixWidget;
   }
 
   /// Returns the box decoration for a specific step based on its index.
@@ -700,7 +700,7 @@ class _WOIStepperState extends State<WOIStepper> {
     }
     TextStyle textStyle = _getTextStyle(index);
 
-    Widget sufixWidget = _getSufixWidget(index);
+    Widget suffixWidget = _getSufixWidget(index);
 
     BoxDecoration decoration = _getItemDecorator(index);
 
@@ -713,7 +713,7 @@ class _WOIStepperState extends State<WOIStepper> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          sufixWidget,
+          suffixWidget,
           textWidget(
             text,
             textStyle,
