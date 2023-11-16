@@ -42,10 +42,10 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.home_max,
+                Icons.route,
               ),
-              label: 'COMPLEX',
-            )
+              label: 'Complex',
+            ),
           ],
         ),
         appBar: AppBar(
@@ -183,6 +183,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
     );
   }
 
+  /// Combination of complex widgets under a complex Tab
   Widget complexWidgets() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -224,28 +225,44 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
     );
   }
 
+  /// Stepper Widget
   Widget stepperWidget() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: WOIStepper.icons(
-        activeStateIndex: currentStepperIndex,
-        activeSeparatorWidget: Container(
-          height: 2,
-          color: Colors.black,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: WOIStepper.icons(
+            activeStateIndex: currentStepperIndex,
+            activeSeparatorWidget: Container(
+              height: 2,
+              color: Colors.black,
+            ),
+            iconData: const [
+              Icons.home,
+              Icons.person,
+              Icons.check,
+            ],
+            completedIconTheme: IconStepperItemStyle(
+              boxDecoration: const BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
+              ),
+              iconThemeData: const IconThemeData(
+                color: Colors.white,
+              ),
+            ),
+          ),
         ),
-        iconData: const [
-          Icons.home,
-          Icons.person,
-          Icons.check_circle,
-        ],
-      ),
+      ],
     );
   }
 
+  /// Buttons to update the value for the stepper state
   Widget stepperButtons() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20.0,
+        vertical: 15,
       ),
       child: Row(
         children: [
