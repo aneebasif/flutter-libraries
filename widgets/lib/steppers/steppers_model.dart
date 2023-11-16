@@ -25,14 +25,14 @@ class IconStepperItemStyle {
   });
 }
 
-/// This model class is used to help define the sufix widget along with its states
+/// This model class is used to help define the suffix widget along with its states
 /// in all three states.
-class SufixWidgetStepper {
+class SuffixWidgetStepper {
   Widget widget;
   Widget? completedState;
   Widget? activeState;
   Widget? inactiveState;
-  SufixWidgetStepper({
+  SuffixWidgetStepper({
     required this.widget,
     this.completedState,
     this.activeState,

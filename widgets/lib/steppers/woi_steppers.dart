@@ -97,7 +97,7 @@ class WOIStepper extends StatefulWidget {
   final List<String> textItemsList;
 
   /// List of suffix widgets associated with each step in the stepper.
-  final List<SufixWidgetStepper>? sufixWidgetItemsList;
+  final List<SuffixWidgetStepper>? sufixWidgetItemsList;
 
   /// Widget to be used as a separator for active steps.
   final Widget? activeSeparatorWidget;
@@ -246,7 +246,7 @@ class WOIStepper extends StatefulWidget {
             '\n[subtextList] length should be equal to [textItemsList]'),
         sufixWidgetItemsList = List.generate(
           textItemsList.length,
-          (index) => SufixWidgetStepper(
+          (index) => SuffixWidgetStepper(
             widget: Container(
               padding: counterPadding ?? const EdgeInsets.all(5),
               margin: counterMargin ??
@@ -391,7 +391,7 @@ class WOIStepper extends StatefulWidget {
         textPadding = null,
         sufixWidgetItemsList = List.generate(
           iconData.length,
-          (index) => SufixWidgetStepper(
+          (index) => SuffixWidgetStepper(
             widget: Icon(iconData[index]),
             activeState: (activeIconTheme?.iconThemeData != null)
                 ? (IconTheme(
@@ -505,7 +505,7 @@ class WOIStepper extends StatefulWidget {
         subtextStyle = null,
         sufixWidgetItemsList = List.generate(
           textItemsList.length,
-          (index) => SufixWidgetStepper(
+          (index) => SuffixWidgetStepper(
             widget: iconList != null ? iconList[index] : const SizedBox(),
             inactiveState: inactiveIcon,
             activeState: activeIcon ??
