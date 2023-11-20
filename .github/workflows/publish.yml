@@ -11,16 +11,21 @@ jobs:
   publish:
     permissions:
       id-token: write # Required for authentication using OIDC
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    with:
-      # Specify the github actions deployment environment
-      environment: pub.dev
-
-    # with:
-    #   working-directory: path/to/package/within/repository
-
-    # runs-on: ubuntu-latest
-    # steps:
-    # - uses: actions/checkout@v2
-    #   with:
-    #     fetch-depth: 0
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+      - name: Install dependencies
+        run: dart pub get
+      # Here you can insert custom steps you need
+      # - run: dart tool/generate-code.dart
+      - name: Publish
+        run: dart pub publish --force
+      # jobs:
+#   publish:
+#     permissions:
+#       id-token: write # Required for authentication using OIDC
+#     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+#     with:
+#       # Specify the github actions deployment environment
+#       environment: pub.dev
