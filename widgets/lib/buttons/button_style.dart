@@ -12,8 +12,8 @@ class WOIButtonStyle {
   /// This is used to provide the prefix widget before the text
   Widget? prefixWidget;
 
-  /// This is used to provide the sufix widget after the text
-  Widget? sufixWidget;
+  /// This is used to provide the suffix widget after the text
+  Widget? suffixWidget;
 
   /// To speficy a color of the button
   Color? backgroundColor;
@@ -32,7 +32,7 @@ class WOIButtonStyle {
     this.borderRadius,
     this.border,
     this.prefixWidget,
-    this.sufixWidget,
+    this.suffixWidget,
     this.backgroundColor,
     this.boxShadow,
     this.gradient,

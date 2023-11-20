@@ -21,6 +21,7 @@ Here are the list of widgets in the package. You can visit the link below to fin
 - [Switches](https://pub.dev/documentation/weoveri_flutter_widgets/latest/switches/switches-library.html)
 - [Radio/Checkmarks](https://pub.dev/documentation/weoveri_flutter_widgets/latest/radio_and_checkbox/radio_and_checkbox-library.html)
 - [TextField](https://pub.dev/documentation/weoveri_flutter_widgets/latest/text_field/text_field-library.html)
+- [Steppers](https://pub.dev/documentation/weoveri_flutter_widgets/latest/steppers/steppers-library.html)
 
 
 
@@ -28,7 +29,7 @@ Here are the list of widgets in the package. You can visit the link below to fin
 
 ```yaml
 # add this line to your dependencies
-weoveri_flutter_widgets: ^0.0.7
+weoveri_flutter_widgets: ^0.0.8
 ```
 
 ```dart
