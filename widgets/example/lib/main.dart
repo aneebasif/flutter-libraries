@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weoveri_flutter_widgets/woi_widgets.dart';
+import 'package:weoveri_flutter_widgets/text.dart';
 
 void main() {
   runApp(const MyApp());
@@ -220,6 +221,15 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             stepperWidget(),
             stepperButtons(),
           ],
+        ),
+        const SizedBox(
+          child: TextLiquidFill(
+            progressValue: 0.1,
+            boxBackgroundColor: Colors.orange,
+            fillColor: Colors.yellow,
+            textColor: Colors.black,
+            size: 200,
+          ),
         ),
       ],
     );
