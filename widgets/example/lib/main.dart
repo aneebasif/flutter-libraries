@@ -224,11 +224,16 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         ),
         const SizedBox(
           child: TextLiquidFill(
-            progressValue: 0.1,
-            boxBackgroundColor: Colors.orange,
-            fillColor: Colors.yellow,
-            textColor: Colors.black,
-            size: 200,
+            progressValue: 55,
+            tiltValue: 0,
+            textStyle: TextStyle(
+              fontSize: 150,
+              fontWeight: FontWeight.bold,
+              height: 0,
+            ),
+            boxBackgroundColor: Colors.red,
+            fillColor: Colors.black,
+            unFillColor: Colors.white,
           ),
         ),
       ],
