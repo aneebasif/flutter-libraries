@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weoveri_flutter_widgets/woi_widgets.dart';
-import 'package:weoveri_flutter_widgets/text.dart';
 
 void main() {
   runApp(const MyApp());
@@ -222,18 +221,38 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             stepperButtons(),
           ],
         ),
+        //----------TextProgressBar----------//
         const SizedBox(
-          child: TextLiquidFill(
-            progressValue: 55,
-            tiltValue: 0,
+          child: WOITextBar(
+            progressValue: 10,
+            tiltValue: 30,
+            borderRadius: 10,
             textStyle: TextStyle(
               fontSize: 150,
               fontWeight: FontWeight.bold,
               height: 0,
+              // shadows: [
+              //   Shadow(
+              //       // bottomLeft
+              //       offset: Offset(-1.5, -1.5),
+              //       color: Colors.green),
+              //   Shadow(
+              //       // bottomRight
+              //       offset: Offset(1.5, -1.5),
+              //       color: Colors.green),
+              //   Shadow(
+              //       // topRight
+              //       offset: Offset(1.5, 1.5),
+              //       color: Colors.green),
+              //   Shadow(
+              //       // topLeft
+              //       offset: Offset(-1.5, 1.5),
+              //       color: Colors.green),
+              // ],
             ),
             boxBackgroundColor: Colors.red,
-            fillColor: Colors.black,
-            unFillColor: Colors.white,
+            fillColor: Colors.orange,
+            textColor: Colors.black,
           ),
         ),
       ],

@@ -16,3 +16,6 @@ export 'text_field/text_field.dart';
 
 /// Library for Steppers
 export 'steppers/steppers.dart';
+
+///Library for Text Progress Bar
+export 'progress_bar/text_progress_bar.dart';
