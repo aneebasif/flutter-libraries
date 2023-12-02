@@ -18,7 +18,7 @@ export 'text_field/text_field.dart';
 export 'steppers/steppers.dart';
 
 ///Library for Text Progress Bar
-export 'progress_bar/woi_text_progress_bar.dart';
+export 'progress_bar/text_bar/woi_text_progress_bar.dart';
 
 ///Library for Section Bar
-export 'progress_bar/woi_section_bar.dart';
+export 'progress_bar/section_bar/woi_section_bar.dart';

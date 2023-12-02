@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_flutter_widgets/progress_bar/text_bar/text_bar_painter.dart';
 
 /// The [WOITextBar] is a progress bar variation that has a text depicting progress which fills up based on the progress value.
 ///
@@ -47,6 +48,8 @@ class WOITextBar extends StatefulWidget {
   /// This changes the border radius of the background of the [WOITextBar]. It cannot be more than 30.
   final double borderRadius;
 
+  /// The [WOITextBar] is a progress bar variation that has a text depicting progress which fills up based on the progress value.
+  /// It takes an interger progressValue as a required parameter which should be between 0 and 100 inclusive. Border radius can not be more than 30
   const WOITextBar({
     Key? key,
     this.textStyle = const TextStyle(
@@ -101,7 +104,7 @@ class _WOITextBarState extends State<WOITextBar> {
               textPainter.size.width,
               textPainter.size.height - (textPainter.size.height * .35),
             ),
-            painter: _WavePainter(
+            painter: FillPainter(
               fillColor: widget.fillColor,
               progressValue: widget.progressValue / 100,
               tiltValue: isTilt ? widget.tiltValue : 0,
@@ -131,45 +134,5 @@ class _WOITextBarState extends State<WOITextBar> {
         ),
       ],
     );
-  }
-}
-
-class _WavePainter extends CustomPainter {
-  final Color fillColor;
-  final double progressValue;
-  final int tiltValue;
-
-  _WavePainter({
-    required this.fillColor,
-    required this.progressValue,
-    this.tiltValue = 0,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final wavePaint = Paint()
-      ..color = fillColor
-      ..strokeWidth = 1.0
-      ..style = PaintingStyle.fill;
-    double fillHeight = size.height - (progressValue * size.height);
-    if (fillHeight < 0) {
-      fillHeight = 0;
-    }
-    final path = Path()
-      ..moveTo(size.width, size.height)
-      ..lineTo(size.width, fillHeight)
-      ..lineTo(
-          0.0,
-          (fillHeight + (tiltValue)) > size.height
-              ? size.height
-              : (fillHeight + tiltValue))
-      ..lineTo(0.0, size.height)
-      ..close();
-    canvas.drawPath(path, wavePaint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }

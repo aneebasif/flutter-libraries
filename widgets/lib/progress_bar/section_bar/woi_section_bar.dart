@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_flutter_widgets/progress_bar/section_bar/section_bar_painter.dart';
 
 /// This is a variation of the progress bar called a section bar.
 ///
@@ -96,6 +97,7 @@ class WOISectionBar extends StatefulWidget {
 
   /// The [WOISectionBar] can be divided into multiple different sections that jointly tracks the progress and completion of a single task.
   /// Each section as defined by the user can track the progress of all hierarchical steps needed to achieve a goal.
+  /// The section bar takes width and a list called sections as required parameters. Sections can not contain a value of 0 and currentProgress cannot be greater that the sum of all elements in the section list.
   WOISectionBar({
     Key? key,
     required this.width,
@@ -274,60 +276,5 @@ class _WOISectionBarState extends State<WOISectionBar> {
       }
     }
     return mainIndex;
-  }
-}
-
-class SectionBarPainter extends CustomPainter {
-  final Color barColor;
-  final Color borderColor;
-  final double borderWidth;
-  final double tiltValue;
-  final bool borderedSections;
-
-  SectionBarPainter({
-    this.barColor = Colors.grey,
-    this.borderColor = Colors.black,
-    this.borderWidth = 1,
-    this.tiltValue = 5,
-    this.borderedSections = true,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..strokeWidth = 1
-      ..color = barColor
-      ..style = PaintingStyle.fill;
-    Paint paint2 = Paint()
-      ..strokeWidth = borderWidth
-      ..color = borderColor
-      ..style = PaintingStyle.stroke;
-
-    Path path = Path();
-    //Right tilt and no tilt
-    if (tiltValue >= 0) {
-      path.moveTo(tiltValue, 0);
-      path.lineTo(size.width, 0);
-      path.lineTo(size.width - tiltValue, size.height);
-      path.lineTo(0, size.height);
-      path.close();
-    } // Left tilt
-    else if (tiltValue < 0) {
-      path.moveTo(0, 0);
-      path.lineTo(size.width - tiltValue.abs(), 0);
-      path.lineTo(size.width, size.height);
-      path.lineTo(tiltValue.abs(), size.height);
-      path.close();
-    }
-
-    canvas.drawPath(path, paint);
-    if (borderedSections) {
-      canvas.drawPath(path, paint2);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }
