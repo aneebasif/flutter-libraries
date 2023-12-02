@@ -1,25 +1,68 @@
 import 'package:flutter/material.dart';
 
+/// The [WOITextBar] is a progress bar variation that has a text depicting progress which fills up based on the progress value.
+///
+/// Here is an example of the [WOITextBar]
+///
+/// ```dart
+/// const SizedBox(
+///       child: WOITextBar(
+///         progressValue: 10,
+///         tiltValue: 0,
+///         borderRadius: 30,
+///         textStyle: TextStyle(
+///           fontSize: 150,
+///           fontWeight: FontWeight.bold,
+///           height: 0,
+///         ),
+///         boxBackgroundColor: Colors.red,
+///         fillColor: Colors.orange,
+///         textColor: Colors.black,
+///       ),
+///     ),
+/// ```
+///
+/// The size of the [WOITextBar] is adjusted by the font size of the widget.
+/// The progress value is a required field and should be between 0 and 100 inclusive.
+
 class WOITextBar extends StatefulWidget {
+  /// Styling of the text. To change color of the text use [WOITextBar]'s textColor property.
   final TextStyle textStyle;
+
+  /// Change color of the background of the widget. By default the color is yellow.
   final Color boxBackgroundColor;
+
+  /// This is the color that fills up the text as the progress value increases.
   final Color fillColor;
+
+  /// This is a required field that changes the progress being tracked by the [WOITextBar].
   final int progressValue;
+
+  /// Tilt value changes the tilt of the fill color. By default value is 0 which means no tilt. Negative value will give right tilt and positive value will give left tilt.
   final int tiltValue;
+
+  /// This is used to change the color of the text.
   final Color textColor;
+
+  /// This changes the border radius of the background of the [WOITextBar]. It cannot be more than 30.
   final double borderRadius;
 
   const WOITextBar({
     Key? key,
-    required this.textStyle,
-    this.boxBackgroundColor = Colors.black,
+    this.textStyle = const TextStyle(
+      fontSize: 150,
+      fontWeight: FontWeight.bold,
+      height: 0,
+    ),
+    this.boxBackgroundColor = Colors.yellow,
     this.fillColor = Colors.blueAccent,
-    this.progressValue = 27,
+    required this.progressValue,
     this.tiltValue = 0,
     this.textColor = Colors.black,
     this.borderRadius = 20,
   })  : assert(progressValue >= 0 && progressValue <= 100,
             "Progress value should be between 0 and 100 inclusive"),
+        assert(borderRadius <= 30, "Border radius should be less than 30"),
         super(key: key);
   @override
   State<WOITextBar> createState() => _WOITextBarState();
@@ -83,25 +126,6 @@ class _WOITextBarState extends State<WOITextBar> {
                 textAlign: TextAlign.center,
                 style: widget.textStyle,
               ),
-              /*         Stack(
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            foreground: Paint()
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = strokeWidth
-              ..color = strokeColor,
-          ).merge(textStyle),
-        ),
-        Text(
-          text,
-          style:  TextStyle(
-              color: textColor
-          ).merge(textStyle),
-        ),
-      ],
-    ), */
             ),
           ),
         ),

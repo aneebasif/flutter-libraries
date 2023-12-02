@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        //----------Capsule Button-------------
+        //----------Capsule Button-------------//
         SizedBox(
           width: 250,
           child: WOITextButton(
@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
           ),
         ),
-        //----------Parallalogram Button-------------
+        //----------Parallalogram Button-------------//
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ],
         ),
 
-        //----------Icon Button-------------
+        //----------Icon Button-------------//
         WOIIconButton(
           size: 45,
           borderRadius: BorderRadius.circular(100),
@@ -225,34 +225,34 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         const SizedBox(
           child: WOITextBar(
             progressValue: 10,
-            tiltValue: 30,
-            borderRadius: 10,
+            tiltValue: -5,
+            borderRadius: 30,
             textStyle: TextStyle(
               fontSize: 150,
               fontWeight: FontWeight.bold,
               height: 0,
-              // shadows: [
-              //   Shadow(
-              //       // bottomLeft
-              //       offset: Offset(-1.5, -1.5),
-              //       color: Colors.green),
-              //   Shadow(
-              //       // bottomRight
-              //       offset: Offset(1.5, -1.5),
-              //       color: Colors.green),
-              //   Shadow(
-              //       // topRight
-              //       offset: Offset(1.5, 1.5),
-              //       color: Colors.green),
-              //   Shadow(
-              //       // topLeft
-              //       offset: Offset(-1.5, 1.5),
-              //       color: Colors.green),
-              // ],
             ),
             boxBackgroundColor: Colors.red,
             fillColor: Colors.orange,
             textColor: Colors.black,
+          ),
+        ),
+        //---------SectionBar---------//
+        SizedBox(
+          child: WOISectionBar(
+            width: 375,
+            initialValue: 0,
+            sections: const [4, 10, 6, 8],
+            currentProgress: 7,
+            tiltValue: 5,
+            sectionSpacing: 0,
+            barBottomPadding: 0,
+            prefixAndSuffixText: true,
+            borderedSections: true,
+            inactiveBarColor: Colors.white,
+            activeBarColor: Colors.red,
+            borderColor: Colors.orange,
+            borderWidth: 3,
           ),
         ),
       ],
