@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:weoveri_flutter_widgets/progress_bar/curved_bar/curved_bar_painter.dart';
 
+enum ArcDirection {
+  left,
+  right,
+  up,
+  down,
+}
+
 /// The [WOICurvedBar] is an arc shape progress bar
 ///
 /// ```dart
@@ -104,6 +111,17 @@ class WOICurvedBar extends StatefulWidget {
 
     /// Width of the border in case the arcBorders flag is set to true.
     this.borderWidth = 5,
+
+    /// Length of the arc. By default the value is -20.
+    /// Arc length can be betweeen -20 and 90, inclusive. Hot restart is recommended when arc length is changed.
+    this.arcLength = -20,
+
+    /// Changes the direction of the arc. By default the direction is up.
+    this.arcDirection = ArcDirection.up,
+
+    /// Boolean value to determine if the center widget needs to rotate when rotating the arc.
+    /// By default the value is false.
+    this.rotateCenter = false,
     super.key,
   }) : assert(currentValue <= finalValue && currentValue >= 0,
             'Current value cannot be greater than final value or less than 0');
@@ -121,12 +139,29 @@ class WOICurvedBar extends StatefulWidget {
   final bool arcBorders;
   final Color borderColor;
   final double borderWidth;
+  final double arcLength;
+  final ArcDirection arcDirection;
+  final bool rotateCenter;
 
   @override
   State<WOICurvedBar> createState() => _WOICurvedBarState();
 }
 
 class _WOICurvedBarState extends State<WOICurvedBar> {
+  double arcLength = -20;
+
+  @override
+  void initState() {
+    if (widget.arcLength < -20) {
+      arcLength = -20;
+    } else if (widget.arcLength > 70) {
+      arcLength = 70;
+    } else {
+      arcLength = widget.arcLength;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -137,18 +172,43 @@ class _WOICurvedBarState extends State<WOICurvedBar> {
         color: widget.backgroundColor,
         borderRadius: BorderRadius.circular(widget.backgroundBorderRadius),
       ),
-      child: CustomPaint(
-        painter: ArcPainter(
-          finalValue: widget.finalValue,
-          currentValue: widget.currentValue,
-          barColor: widget.barColor,
-          fillColor: widget.fillColor,
-          arcWidth: widget.arcWidth,
-          borders: widget.arcBorders,
-          borderColor: widget.borderColor,
-          borderWidth: widget.borderWidth,
+      child: RotatedBox(
+        quarterTurns: widget.arcDirection == ArcDirection.up
+            ? 0
+            : widget.arcDirection == ArcDirection.right
+                ? 1
+                : widget.arcDirection == ArcDirection.left
+                    ? 3
+                    : widget.arcDirection == ArcDirection.down
+                        ? 2
+                        : 0,
+        child: CustomPaint(
+          painter: ArcPainter(
+            finalValue: widget.finalValue,
+            currentValue: widget.currentValue,
+            barColor: widget.barColor,
+            fillColor: widget.fillColor,
+            arcWidth: widget.arcWidth,
+            borders: widget.arcBorders,
+            borderColor: widget.borderColor,
+            borderWidth: widget.borderWidth,
+            arcLength: arcLength,
+          ),
+          child: widget.rotateCenter
+              ? widget.center
+              : RotatedBox(
+                  quarterTurns: widget.arcDirection == ArcDirection.up
+                      ? 0
+                      : widget.arcDirection == ArcDirection.right
+                          ? -1
+                          : widget.arcDirection == ArcDirection.left
+                              ? -3
+                              : widget.arcDirection == ArcDirection.down
+                                  ? -2
+                                  : 0,
+                  child: widget.center,
+                ),
         ),
-        child: widget.center,
       ),
     );
   }

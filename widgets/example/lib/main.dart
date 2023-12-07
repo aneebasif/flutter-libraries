@@ -185,7 +185,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
   /// Combination of complex widgets under a complex Tab
   Widget complexWidgets() {
-    int finalValue = 9; //TODO: values to change for curved bar.
+    int finalValue = 9;
     int curentValue = 5;
     return SingleChildScrollView(
       child: Column(
@@ -247,7 +247,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               initialValue: 0,
               sections: const [4, 10, 6, 8],
               currentProgress: 7,
-              tiltValue: 5,
+              tiltValue: -5,
               sectionSpacing: 0,
               barBottomPadding: 0,
               prefixAndSuffixText: true,
@@ -265,9 +265,12 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               finalValue: finalValue,
               currentValue: curentValue,
               arcBorders: true,
+              arcLength: 70,
+              arcDirection: ArcDirection.up,
+              rotateCenter: false,
               padding: const EdgeInsets.all(20),
               size: 220,
-              backgroundBorderRadius: 200,
+              backgroundBorderRadius: 20,
               barColor: Colors.grey[300]!,
               fillColor: Colors.purple,
               borderColor: Colors.blue[900]!,

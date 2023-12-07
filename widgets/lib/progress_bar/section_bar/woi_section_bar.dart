@@ -37,6 +37,7 @@ class WOISectionBar extends StatefulWidget {
   /// This list takes number of units of space and progress that each section will take.
   /// Example [4, 10, 6, 8] will create 4 sections where first section will go from 0-4 and second will go from 5-14 all the way up to 28 which is the final value.
   /// The list cannot accept 0 as a value.
+  /// Hard refresh is recommended when this list is changed.
   final List<int> sections;
 
   /// The starting progress value. By default the initial value is 0.
@@ -147,7 +148,6 @@ class _WOISectionBarState extends State<WOISectionBar> {
   int sumOfActiveIndexValues = 0;
   Map<int, List<int>> activeSectionFinder = {};
   int finalValue = 0;
-
   @override
   void initState() {
     for (int i = 0; i < widget.sections.length; i++) {

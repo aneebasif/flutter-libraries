@@ -17,11 +17,5 @@ export 'text_field/text_field.dart';
 /// Library for Steppers
 export 'steppers/steppers.dart';
 
-/// Library for Text Progress Bar
-export 'progress_bar/text_bar/woi_text_progress_bar.dart';
-
-/// Library for Section Bar
-export 'progress_bar/section_bar/woi_section_bar.dart';
-
-/// Library for Curved Bar
-export 'progress_bar/curved_bar/woi_curved_bar.dart';
+/// Library for Progress Bars
+export 'progress_bar/progress_bar.dart';
