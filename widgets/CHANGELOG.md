@@ -26,10 +26,7 @@
 
 - There is an addition of Text field widget with updated documentation including images for the code snippet.
 
-## ^0.0.8
+## 0.0.8
 
 - Addition of a Stepper widget with documentations and code snippets.
-
-## ^0.0.9
-
 - Addition of progress bars with documentation and code snippets.
