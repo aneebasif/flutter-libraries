@@ -42,6 +42,12 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
             BottomNavigationBarItem(
               icon: Icon(
+                Icons.stairs_rounded,
+              ),
+              label: 'Steppers',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
                 Icons.route,
               ),
               label: 'Complex',
@@ -56,8 +62,21 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
           ),
         ),
-        body: currentIndex == 1 ? complexWidgets() : simpleWidgets(),
+        body: currentIndex == 1
+            ? stepperWidgets()
+            : (currentIndex == 2 ? complexWidgets() : simpleWidgets()),
       ),
+    );
+  }
+
+  Widget stepperWidgets() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        //----------Steppers-------------//
+        stepperWidget(),
+        stepperButtons(),
+      ],
     );
   }
 
@@ -71,6 +90,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           width: 250,
           child: WOITextButton(
             text: 'Submit'.toUpperCase(),
+            onTap: () {},
             buttonStyle: WOIButtonStyle(
               prefixWidget: const SizedBox(
                 child: Icon(
@@ -217,18 +237,18 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               ),
             ),
           ),
-          //----------Steppers-------------//
+          /* //----------Steppers-------------//
           Column(
             children: [
               stepperWidget(),
               stepperButtons(),
             ],
-          ),
+          ), */
           //----------TextProgressBar----------//
           SizedBox(
             child: WOITextBar(
-              progressValue: 50,
-              tiltValue: -20,
+              progressValue: 55,
+              tiltValue: 0,
               borderRadius: 30,
               textStyle: const TextStyle(
                 fontSize: 150,
@@ -243,10 +263,10 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           //---------SectionBar---------//
           SizedBox(
             child: WOISectionBar(
-              width: 375,
+              width: 345,
               initialValue: 0,
-              sections: const [4, 10, 6, 8],
-              currentProgress: 7,
+              sections: const [4, 6, 2, 16],
+              currentProgress: 16,
               tiltValue: -5,
               sectionSpacing: 0,
               barBottomPadding: 0,
@@ -265,12 +285,12 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               finalValue: finalValue,
               currentValue: curentValue,
               arcBorders: true,
-              arcLength: 70,
+              arcLength: 0,
               arcDirection: ArcDirection.up,
               rotateCenter: false,
               padding: const EdgeInsets.all(20),
               size: 220,
-              backgroundBorderRadius: 20,
+              backgroundBorderRadius: 200,
               barColor: Colors.grey[300]!,
               fillColor: Colors.purple,
               borderColor: Colors.blue[900]!,
@@ -343,6 +363,36 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                 color: Colors.white,
               ),
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: WOIStepper.counterText(
+            activeStateIndex: currentStepperIndex,
+            activeSeparatorWidget: Container(
+              height: 2,
+              color: Colors.black,
+            ),
+            textItemsList: const [
+              'Step1',
+              'Step2',
+              'Step3',
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: WOIStepper.iconText(
+            activeStateIndex: currentStepperIndex,
+            activeSeparatorWidget: Container(
+              height: 2,
+              color: Colors.black,
+            ),
+            textItemsList: const [
+              'Step1',
+              'Step2',
+              'Step3',
+            ],
           ),
         ),
       ],

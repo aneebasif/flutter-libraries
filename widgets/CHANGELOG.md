@@ -30,3 +30,8 @@
 
 - Addition of a Stepper widget with documentations and code snippets.
 - Addition of progress bars with documentation and code snippets.
+
+## 0.0.9
+
+- Fixed null check issue with text field.
+- Added documentation to enum in curved bar.

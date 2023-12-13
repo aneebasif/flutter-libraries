@@ -60,7 +60,7 @@ Incase of any issues or assistance please reach out to:
 - [Mahnoor Rizwan](mailto:mahnoor@we-over-i.com)
 - [Awais Kayani](mailto:awais@we-over-i.com)
 
-## Licence
+## License
 
 This project is licensed under the MIT license, Copyright (c) 2023 We Over I. For more information see
 [LICENSE.md](LICENSE)

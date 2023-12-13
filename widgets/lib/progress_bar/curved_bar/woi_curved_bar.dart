@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:weoveri_flutter_widgets/progress_bar/curved_bar/curved_bar_painter.dart';
 
+/// This is to define the direction of the Arc to be created.
+/// By default the direction is ArcDirection.up which create a normal arc.
+/// If for example the direction is changed to ArcDirection.left, it will create a C-shaped arc.
 enum ArcDirection {
   left,
   right,
