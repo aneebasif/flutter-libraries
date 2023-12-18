@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        //----------Capsule Button-------------
+        //----------Capsule Button-------------//
         SizedBox(
           width: 250,
           child: WOITextButton(
@@ -220,6 +220,40 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             stepperWidget(),
             stepperButtons(),
           ],
+        ),
+        //----------TextProgressBar----------//
+        const SizedBox(
+          child: WOITextBar(
+            progressValue: 10,
+            tiltValue: -5,
+            borderRadius: 30,
+            textStyle: TextStyle(
+              fontSize: 150,
+              fontWeight: FontWeight.bold,
+              height: 0,
+            ),
+            boxBackgroundColor: Colors.red,
+            fillColor: Colors.orange,
+            textColor: Colors.black,
+          ),
+        ),
+        //---------SectionBar---------//
+        SizedBox(
+          child: WOISectionBar(
+            width: 375,
+            initialValue: 0,
+            sections: const [4, 10, 6, 8],
+            currentProgress: 7,
+            tiltValue: 5,
+            sectionSpacing: 0,
+            barBottomPadding: 0,
+            prefixAndSuffixText: true,
+            borderedSections: true,
+            inactiveBarColor: Colors.white,
+            activeBarColor: Colors.red,
+            borderColor: Colors.orange,
+            borderWidth: 3,
+          ),
         ),
       ],
     );
