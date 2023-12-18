@@ -200,6 +200,7 @@ class _WOICurvedBarState extends State<WOICurvedBar> {
     );
   }
 
+  //Functions to add rotations to the curved bar.
   int widgetRotations() {
     if (widget.arcDirection == ArcDirection.right) {
       return 1;
@@ -213,6 +214,7 @@ class _WOICurvedBarState extends State<WOICurvedBar> {
     return 0;
   }
 
+  //Function to keep center widget straigth when rotating the curved bar, if needed.
   int centerCounterRotations() {
     if (widget.rotateCenter == false) {
       if (widget.arcDirection == ArcDirection.right) {

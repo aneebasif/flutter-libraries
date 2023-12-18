@@ -104,7 +104,7 @@ class _WOITextBarState extends State<WOITextBar> {
               textPainter.size.width,
               textPainter.size.height - (textPainter.size.height * .35),
             ),
-            painter: FillPainter(
+            painter: FillTextPainter(
               fillColor: widget.fillColor,
               progressValue: widget.progressValue / 100,
               tiltValue: isTilt ? widget.tiltValue : 0,
