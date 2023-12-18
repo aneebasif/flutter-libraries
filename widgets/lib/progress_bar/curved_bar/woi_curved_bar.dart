@@ -176,15 +176,7 @@ class _WOICurvedBarState extends State<WOICurvedBar> {
         borderRadius: BorderRadius.circular(widget.backgroundBorderRadius),
       ),
       child: RotatedBox(
-        quarterTurns: widget.arcDirection == ArcDirection.up
-            ? 0
-            : widget.arcDirection == ArcDirection.right
-                ? 1
-                : widget.arcDirection == ArcDirection.left
-                    ? 3
-                    : widget.arcDirection == ArcDirection.down
-                        ? 2
-                        : 0,
+        quarterTurns: widgetRotations(),
         child: CustomPaint(
           painter: ArcPainter(
             finalValue: widget.finalValue,
@@ -200,19 +192,39 @@ class _WOICurvedBarState extends State<WOICurvedBar> {
           child: widget.rotateCenter
               ? widget.center
               : RotatedBox(
-                  quarterTurns: widget.arcDirection == ArcDirection.up
-                      ? 0
-                      : widget.arcDirection == ArcDirection.right
-                          ? -1
-                          : widget.arcDirection == ArcDirection.left
-                              ? -3
-                              : widget.arcDirection == ArcDirection.down
-                                  ? -2
-                                  : 0,
+                  quarterTurns: centerCounterRotations(),
                   child: widget.center,
                 ),
         ),
       ),
     );
+  }
+
+  int widgetRotations() {
+    if (widget.arcDirection == ArcDirection.right) {
+      return 1;
+    }
+    if (widget.arcDirection == ArcDirection.down) {
+      return 2;
+    }
+    if (widget.arcDirection == ArcDirection.left) {
+      return 3;
+    }
+    return 0;
+  }
+
+  int centerCounterRotations() {
+    if (widget.rotateCenter == false) {
+      if (widget.arcDirection == ArcDirection.right) {
+        return -1;
+      }
+      if (widget.arcDirection == ArcDirection.down) {
+        return -2;
+      }
+      if (widget.arcDirection == ArcDirection.left) {
+        return -3;
+      }
+    }
+    return 0;
   }
 }
