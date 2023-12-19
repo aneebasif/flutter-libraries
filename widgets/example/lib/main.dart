@@ -248,7 +248,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           SizedBox(
             child: WOITextBar(
               progressValue: 50,
-              tiltValue: 0,
+              tiltValue: -5,
               borderRadius: 30,
               textStyle: const TextStyle(
                 fontSize: 150,
@@ -286,7 +286,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               finalValue: finalValue,
               currentValue: curentValue,
               arcBorders: true,
-              arcLength: 60,
+              arcLength: 0,
               arcDirection: ArcDirection.up,
               rotateCenter: true,
               padding: const EdgeInsets.all(20),
