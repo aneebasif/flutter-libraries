@@ -205,8 +205,6 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
   /// Combination of complex widgets under a complex Tab
   Widget complexWidgets() {
-    int finalValue = 9;
-    int curentValue = 5;
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -237,13 +235,6 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               ),
             ),
           ),
-          /* //----------Steppers-------------//
-          Column(
-            children: [
-              stepperWidget(),
-              stepperButtons(),
-            ],
-          ), */
           //----------TextProgressBar----------//
           SizedBox(
             child: WOITextBar(
@@ -280,57 +271,16 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
           ),
           //-----------CurvedBar------------//
+          curvedBar(),
+          //--------CountDown---------//
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: WOICurvedBar(
-              finalValue: finalValue,
-              currentValue: curentValue,
-              arcBorders: true,
-              arcLength: 0,
-              arcDirection: ArcDirection.up,
-              rotateCenter: true,
-              padding: const EdgeInsets.all(20),
-              size: 220,
-              backgroundBorderRadius: 50,
-              barColor: Colors.grey[300]!,
-              fillColor: Colors.blue,
-              borderColor: Colors.black,
-              backgroundColor: Colors.grey.shade300,
-              center: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          curentValue.toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 70),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 10),
-                          child: Text(
-                            '/',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w200, fontSize: 80),
-                          ),
-                        ),
-                        Text(
-                          finalValue.toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 70),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Text(
-                    'Check-Ins',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
+            padding: const EdgeInsets.all(20),
+            child: WOICountdowns(
+              timeInSeconds: 30,
+              timerSize: 200,
+              timerBackgroundColor: Colors.amber[100]!,
+              timerFillColor: Colors.amber,
+              coolDownTimerColor: Colors.grey.shade300,
             ),
           ),
         ],
@@ -440,6 +390,65 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Curved bar
+  Widget curvedBar() {
+    int finalValue = 9;
+    int curentValue = 5;
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: WOICurvedBar(
+        finalValue: finalValue,
+        currentValue: curentValue,
+        arcBorders: true,
+        arcLength: 0,
+        arcDirection: ArcDirection.up,
+        rotateCenter: true,
+        padding: const EdgeInsets.all(20),
+        size: 220,
+        backgroundBorderRadius: 50,
+        barColor: Colors.grey[300]!,
+        fillColor: Colors.blue,
+        borderColor: Colors.black,
+        backgroundColor: Colors.grey.shade300,
+        center: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    curentValue.toString(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 70),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      '/',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w200, fontSize: 80),
+                    ),
+                  ),
+                  Text(
+                    finalValue.toString(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 70),
+                  ),
+                ],
+              ),
+            ),
+            const Text(
+              'Check-Ins',
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }
