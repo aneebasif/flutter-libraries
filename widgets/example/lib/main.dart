@@ -276,11 +276,15 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.all(20),
             child: WOICountdowns(
-              timeInSeconds: 30,
+              timeInSeconds: 10,
               timerSize: 200,
+              timerWidth: 20,
               timerBackgroundColor: Colors.amber[100]!,
               timerFillColor: Colors.amber,
-              coolDownTimerColor: Colors.grey.shade300,
+              cooldownTimerBoxDecoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(200),
+              ),
             ),
           ),
         ],
