@@ -73,6 +73,7 @@ class WOICountdownTimer extends StatefulWidget {
   /// Boolean value to determine if the color of the separator dots should change to the [selectedTimerValueColor] or stay white.
   final bool changeSeparatorColor;
 
+  /// Option to choose if timer for hours is needed or not.
   final bool isHoursNeeded;
 
   /// Text style of the labels at top namely, the hours, minutes and seconds labels.
