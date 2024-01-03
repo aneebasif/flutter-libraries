@@ -1,5 +1,4 @@
 /// The all in one library to access all of the widgets
-
 library widgets;
 
 /// A library for Buttons including Text, Parallelogram and Icon button

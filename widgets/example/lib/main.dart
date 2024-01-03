@@ -272,7 +272,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
           //-----------CurvedBar------------//
           curvedBar(),
-          //--------CountDown---------//
+          //--------CountDownTimerVariation1---------//
           Padding(
             padding: const EdgeInsets.all(20),
             child: WOICountdowns(
@@ -287,6 +287,10 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               ),
             ),
           ),
+          //--------CountdownTimerVariation2---------//
+          const WOICountdownTimer(
+            isHoursNeeded: true,
+          )
         ],
       ),
     );
