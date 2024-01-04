@@ -598,11 +598,19 @@ class _WOICountdownTimerState extends State<WOICountdownTimer> {
                               curve: Easing.linear,
                             );
                           }
-                          if (selectedMinutes == 0 && selectedHours != 0) {
+                          if (selectedMinutes == 0 &&
+                              selectedHours != 0 &&
+                              selectedSeconds == 0) {
                             hoursController.selectedItem - 1;
                             hoursController.animateTo(
                               (hoursController.position.pixels -
                                   scrollPositionHandler),
+                              duration: const Duration(milliseconds: 500),
+                              curve: Easing.linear,
+                            );
+                            minutesController.animateTo(
+                              minutesController.position.pixels -
+                                  scrollPositionHandler,
                               duration: const Duration(milliseconds: 500),
                               curve: Easing.linear,
                             );
