@@ -290,7 +290,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           //--------CountdownTimerVariation2---------//
           const WOICountdownTimer(
             isHoursNeeded: true,
-          )
+          ),
         ],
       ),
     );
