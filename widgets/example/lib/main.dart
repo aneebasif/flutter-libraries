@@ -42,6 +42,12 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
             BottomNavigationBarItem(
               icon: Icon(
+                Icons.stairs_rounded,
+              ),
+              label: 'Steppers',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
                 Icons.route,
               ),
               label: 'Complex',
@@ -56,8 +62,21 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
           ),
         ),
-        body: currentIndex == 1 ? complexWidgets() : simpleWidgets(),
+        body: currentIndex == 1
+            ? stepperWidgets()
+            : (currentIndex == 2 ? complexWidgets() : simpleWidgets()),
       ),
+    );
+  }
+
+  Widget stepperWidgets() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        //----------Steppers-------------//
+        stepperWidget(),
+        stepperButtons(),
+      ],
     );
   }
 
@@ -71,6 +90,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           width: 250,
           child: WOITextButton(
             text: 'Submit'.toUpperCase(),
+            onTap: () {},
             buttonStyle: WOIButtonStyle(
               prefixWidget: const SizedBox(
                 child: Icon(
@@ -89,7 +109,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
           ),
         ),
-        //----------Parallalogram Button-------------
+        //----------Parallalogram Button-------------//
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -109,7 +129,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ],
         ),
 
-        //----------Icon Button-------------
+        //----------Icon Button-------------//
         WOIIconButton(
           size: 45,
           borderRadius: BorderRadius.circular(100),
@@ -138,7 +158,6 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
             ),
           ],
         ),
-
         //----------Radio Buttons-------------//
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -185,77 +204,136 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
   /// Combination of complex widgets under a complex Tab
   Widget complexWidgets() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        //----------Text Field-------------//
-        const Padding(
-          padding: EdgeInsets.all(20),
-          child: WOITextField(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
+    int finalValue = 9;
+    int curentValue = 5;
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //----------Text Field-------------//
+          const Padding(
+            padding: EdgeInsets.all(20),
+            child: WOITextField(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xff007EDA),
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(6),
+                ),
+              ),
+              labelText: 'Email Address',
+              helperText: 'Make sure it is valid',
+              hintText: 'Placeholder Text',
+              prefixIcon: Icon(
+                Icons.email_outlined,
                 color: Color(0xff007EDA),
               ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
+              hintTextStyle: TextStyle(
+                color: Color(0xffB6A8A8),
+                fontSize: 18,
               ),
             ),
-            labelText: 'Email Address',
-            helperText: 'Make sure it is valid',
-            hintText: 'Placeholder Text',
-            prefixIcon: Icon(
-              Icons.email_outlined,
-              color: Color(0xff007EDA),
-            ),
-            hintTextStyle: TextStyle(
-              color: Color(0xffB6A8A8),
-              fontSize: 18,
+          ),
+          /* //----------Steppers-------------//
+          Column(
+            children: [
+              stepperWidget(),
+              stepperButtons(),
+            ],
+          ), */
+          //----------TextProgressBar----------//
+          SizedBox(
+            child: WOITextBar(
+              progressValue: 50,
+              tiltValue: 0,
+              borderRadius: 30,
+              textStyle: const TextStyle(
+                fontSize: 150,
+                fontWeight: FontWeight.bold,
+                height: 0,
+              ),
+              boxBackgroundColor: Colors.grey[300]!,
+              fillColor: Colors.blue,
+              textColor: Colors.white,
             ),
           ),
-        ),
-        //----------Steppers-------------//
-        Column(
-          children: [
-            stepperWidget(),
-            stepperButtons(),
-          ],
-        ),
-        //----------TextProgressBar----------//
-        const SizedBox(
-          child: WOITextBar(
-            progressValue: 10,
-            tiltValue: -5,
-            borderRadius: 30,
-            textStyle: TextStyle(
-              fontSize: 150,
-              fontWeight: FontWeight.bold,
-              height: 0,
+          //---------SectionBar---------//
+          SizedBox(
+            child: WOISectionBar(
+              width: 345,
+              initialValue: 0,
+              sections: const [6, 4, 10, 8],
+              currentProgress: 8,
+              tiltValue: -5,
+              sectionSpacing: 0,
+              barBottomPadding: 0,
+              prefixAndSuffixText: true,
+              borderedSections: true,
+              progressIndicatorColor: Colors.white,
+              inactiveBarColor: Colors.white,
+              activeBarColor: Colors.blue,
+              borderColor: Colors.black,
+              borderWidth: 3,
             ),
-            boxBackgroundColor: Colors.red,
-            fillColor: Colors.orange,
-            textColor: Colors.black,
           ),
-        ),
-        //---------SectionBar---------//
-        SizedBox(
-          child: WOISectionBar(
-            width: 375,
-            initialValue: 0,
-            sections: const [4, 10, 6, 8],
-            currentProgress: 7,
-            tiltValue: 5,
-            sectionSpacing: 0,
-            barBottomPadding: 0,
-            prefixAndSuffixText: true,
-            borderedSections: true,
-            inactiveBarColor: Colors.white,
-            activeBarColor: Colors.red,
-            borderColor: Colors.orange,
-            borderWidth: 3,
+          //-----------CurvedBar------------//
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: WOICurvedBar(
+              finalValue: finalValue,
+              currentValue: curentValue,
+              arcBorders: true,
+              arcLength: 60,
+              arcDirection: ArcDirection.up,
+              rotateCenter: true,
+              padding: const EdgeInsets.all(20),
+              size: 220,
+              backgroundBorderRadius: 50,
+              barColor: Colors.grey[300]!,
+              fillColor: Colors.blue,
+              borderColor: Colors.black,
+              backgroundColor: Colors.grey.shade300,
+              center: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          curentValue.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 70),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            '/',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w200, fontSize: 80),
+                          ),
+                        ),
+                        Text(
+                          finalValue.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 70),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Text(
+                    'Check-Ins',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -285,6 +363,36 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
                 color: Colors.white,
               ),
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: WOIStepper.counterText(
+            activeStateIndex: currentStepperIndex,
+            activeSeparatorWidget: Container(
+              height: 2,
+              color: Colors.black,
+            ),
+            textItemsList: const [
+              'Step1',
+              'Step2',
+              'Step3',
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: WOIStepper.iconText(
+            activeStateIndex: currentStepperIndex,
+            activeSeparatorWidget: Container(
+              height: 2,
+              color: Colors.black,
+            ),
+            textItemsList: const [
+              'Step1',
+              'Step2',
+              'Step3',
+            ],
           ),
         ),
       ],

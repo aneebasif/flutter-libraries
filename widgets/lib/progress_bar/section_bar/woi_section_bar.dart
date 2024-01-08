@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:weoveri_flutter_widgets/progress_bar/section_bar/section_bar_painter.dart';
 
 /// This is a variation of the progress bar called a section bar.
+/// The [WOISectionBar] can be divided into multiple different sections that jointly tracks the progress and completion of a single task.
+/// Each section as defined by the user can track the progress of all hierarchical steps needed to achieve a goal.
+/// The section bar takes width and a list called sections as required parameters. Sections can not contain a value of 0 and currentProgress cannot be greater that the sum of all elements in the section list.
 ///
 /// Here is an example of the [WOISectionBar]
 ///
@@ -34,6 +37,7 @@ class WOISectionBar extends StatefulWidget {
   /// This list takes number of units of space and progress that each section will take.
   /// Example [4, 10, 6, 8] will create 4 sections where first section will go from 0-4 and second will go from 5-14 all the way up to 28 which is the final value.
   /// The list cannot accept 0 as a value.
+  /// Hard refresh is recommended when this list is changed.
   final List<int> sections;
 
   /// The starting progress value. By default the initial value is 0.
@@ -144,7 +148,6 @@ class _WOISectionBarState extends State<WOISectionBar> {
   int sumOfActiveIndexValues = 0;
   Map<int, List<int>> activeSectionFinder = {};
   int finalValue = 0;
-
   @override
   void initState() {
     for (int i = 0; i < widget.sections.length; i++) {

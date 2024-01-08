@@ -276,7 +276,9 @@ class _WOITextFieldState extends State<WOITextField> {
                 widget.onSubmitted!(value);
               },
               onTap: () {
-                widget.onTap!();
+                if (widget.onTap != null) {
+                  widget.onTap!();
+                }
               },
               style: _controllerTextStyle(),
               keyboardType: widget.textInputType,
