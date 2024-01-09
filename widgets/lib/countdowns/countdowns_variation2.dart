@@ -509,7 +509,9 @@ class _WOICountdownTimerState extends State<WOICountdownTimer> {
                             }
                             if (selectedMinutes == 0 &&
                                 selectedHours != 0 &&
-                                selectedSeconds == 0) {
+                                selectedSeconds == 0 &&
+                                minutesController.selectedItem !=
+                                    minutesEndTime) {
                               hoursController.selectedItem - 1;
                               hoursController.animateTo(
                                 (hoursController.position.pixels -
@@ -520,15 +522,6 @@ class _WOICountdownTimerState extends State<WOICountdownTimer> {
                               minutesController.animateTo(
                                 minutesController.position.pixels -
                                     scrollPositionHandler,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Easing.linear,
-                              );
-                            }
-                            if (selectedSeconds == 0 && selectedHours != 0) {
-                              hoursController.selectedItem - 1;
-                              hoursController.animateTo(
-                                (hoursController.position.pixels -
-                                    scrollPositionHandler),
                                 duration: const Duration(milliseconds: 500),
                                 curve: Easing.linear,
                               );
@@ -560,6 +553,14 @@ class _WOICountdownTimerState extends State<WOICountdownTimer> {
                     double scrollPositionHandler = widget.scrollableTileSize;
                     int secondsEndTime = 0;
                     int minutesEndTime = 0;
+                    if (minutesController.selectedItem != 0) {
+                      secondsEndTime += 60;
+                      secondsEndTime *= minutesController.selectedItem;
+                    }
+                    if (hoursController.selectedItem != 0) {
+                      minutesEndTime += 60;
+                      minutesEndTime *= hoursController.selectedItem;
+                    }
                     if (pauseButtonPressed) {
                       pauseButtonPressed = false;
                       setState(() {});
@@ -600,7 +601,9 @@ class _WOICountdownTimerState extends State<WOICountdownTimer> {
                           }
                           if (selectedMinutes == 0 &&
                               selectedHours != 0 &&
-                              selectedSeconds == 0) {
+                              selectedSeconds == 0 &&
+                              minutesController.selectedItem !=
+                                  minutesEndTime) {
                             hoursController.selectedItem - 1;
                             hoursController.animateTo(
                               (hoursController.position.pixels -
@@ -611,15 +614,6 @@ class _WOICountdownTimerState extends State<WOICountdownTimer> {
                             minutesController.animateTo(
                               minutesController.position.pixels -
                                   scrollPositionHandler,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Easing.linear,
-                            );
-                          }
-                          if (selectedSeconds == 0 && selectedHours != 0) {
-                            hoursController.selectedItem - 1;
-                            hoursController.animateTo(
-                              (hoursController.position.pixels -
-                                  scrollPositionHandler),
                               duration: const Duration(milliseconds: 500),
                               curve: Easing.linear,
                             );

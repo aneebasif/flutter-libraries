@@ -291,6 +291,10 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           const WOICountdownTimer(
             isHoursNeeded: true,
           ),
+          const Padding(
+            padding: EdgeInsets.only(top: 30),
+            child: WOIBarGraph(),
+          ),
         ],
       ),
     );
