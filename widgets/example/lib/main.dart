@@ -293,7 +293,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           ),
           const Padding(
             padding: EdgeInsets.only(top: 30),
-            child: WOIBarGraph(),
+            child: WOIBarGraph(
+              yaxisValues: [150, 200, 175, 100, 80, 140, 160],
+            ),
           ),
         ],
       ),
