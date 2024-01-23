@@ -238,8 +238,8 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           //----------TextProgressBar----------//
           SizedBox(
             child: WOITextBar(
-              progressValue: 50,
-              tiltValue: -5,
+              progressValue: 70,
+              tiltValue: -20,
               borderRadius: 30,
               textStyle: const TextStyle(
                 fontSize: 150,
@@ -257,7 +257,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               width: 345,
               initialValue: 0,
               sections: const [6, 4, 10, 8],
-              currentProgress: 8,
+              currentProgress: 14,
               tiltValue: -5,
               sectionSpacing: 0,
               barBottomPadding: 0,
@@ -294,7 +294,17 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           const Padding(
             padding: EdgeInsets.only(top: 30),
             child: WOIBarGraph(
-              yaxisValues: [150, 200, 175, 100, 80, 140, 160],
+              height: 300,
+              yaxisValues: [120, -200, 150, 80, -50, 110, 130],
+              xaxisLabels: [
+                'Mon',
+                'Tue',
+                'Wed',
+                'Thu',
+                'Fri',
+                'Sat',
+                'Sun',
+              ],
             ),
           ),
         ],
