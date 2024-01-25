@@ -273,40 +273,13 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           //-----------CurvedBar------------//
           curvedBar(),
           //--------CountDownTimerVariation1---------//
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: WOICountdowns(
-              timeInSeconds: 10,
-              timerSize: 200,
-              timerWidth: 20,
-              timerBackgroundColor: Colors.amber[100]!,
-              timerFillColor: Colors.amber,
-              cooldownTimerBoxDecoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(200),
-              ),
-            ),
-          ),
+          countDownTimerVariation1(),
           //--------CountdownTimerVariation2---------//
           const WOICountdownTimer(
             isHoursNeeded: true,
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 30),
-            child: WOIBarGraph(
-              height: 300,
-              yaxisValues: [120, -200, 150, 80, -50, 110, 130],
-              xaxisLabels: [
-                'Mon',
-                'Tue',
-                'Wed',
-                'Thu',
-                'Fri',
-                'Sat',
-                'Sun',
-              ],
-            ),
-          ),
+          //--------Bar Graph and Histogram---------//
+          barGraphAndHistogram(),
         ],
       ),
     );
@@ -472,6 +445,58 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               style: TextStyle(fontSize: 16),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// Count down timer variation1
+  Widget countDownTimerVariation1() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: WOICountdowns(
+        timeInSeconds: 10,
+        timerSize: 200,
+        timerWidth: 20,
+        timerBackgroundColor: Colors.amber[100]!,
+        timerFillColor: Colors.amber,
+        cooldownTimerBoxDecoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(200),
+        ),
+      ),
+    );
+  }
+
+  /// Bar graph and histogram
+  Widget barGraphAndHistogram() {
+    return const Padding(
+      padding: EdgeInsets.only(top: 30),
+      child: WOIBarGraph(
+        height: 300,
+        width: 320,
+        barPadding: 0,
+        yaxisValues: [120, 400, 150, 80, 50, 110, 130],
+        xaxisValues: [
+          'Mon',
+          'Tue',
+          'Wed',
+          'Thu',
+          'Fri',
+          'Sat',
+          'Sun',
+        ],
+        yAxisLabel: Text(
+          'Profits',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
+        xAxisLabel: Text(
+          'Days of the Week',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
+        graphHeadingText: Text(
+          'Daily Profits',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
       ),
     );
