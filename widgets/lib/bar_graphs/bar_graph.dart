@@ -590,13 +590,10 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
         Padding(
           padding: EdgeInsets.only(left: widget.yaxisTextAndLinePadding),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: List.generate(
               widget.xaxisValues.length,
               (index) => Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: (widget.yaxisTextAndLinePadding * 2)),
+                child: SizedBox(
                   child: Text(
                     widget.xaxisValues[index],
                     style: widget.textStyle,

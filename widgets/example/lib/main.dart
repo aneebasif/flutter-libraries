@@ -475,8 +475,8 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       child: WOIBarGraph(
         height: 300,
         width: 320,
-        barPadding: 0,
-        yaxisValues: [120, 400, 150, 80, 50, 110, 130],
+        barPadding: 5,
+        yaxisValues: [120, 400, 150, 80, -50, -110, 130],
         xaxisValues: [
           'Mon',
           'Tue',
