@@ -476,7 +476,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         height: 300,
         width: 320,
         barPadding: 5,
-        yaxisValues: [120, 400, 150, 80, -50, -110, 130],
+        yaxisValues: [120, 400, 150, 80, 50, 110, 130],
         xaxisValues: [
           'Mon',
           'Tue',

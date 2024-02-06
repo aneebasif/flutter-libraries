@@ -40,80 +40,137 @@ class WOIBarGraph extends StatefulWidget {
 }
 
 class _WOIBarGraphState extends State<WOIBarGraph> {
-  double positiveVerticalUnitLength = 0;
-  double negativeVerticalUnitLength = 0;
-  bool negative = false;
-  bool allNegative = false;
-  List<double> dummyList = [];
-  List<double> dummyListNegativeNumbers = [];
-  List<double> listToCheckIfAllValuesAreNegative = [];
-  int getLargestPositiveValue = 0;
-  int getLargestNegativeValue = 0;
-  int numberOfIncrements = 0;
-  int incrementDifference = 50;
+  double max = 0;
+  double tempForMax = 0;
+  double increment = 0.2;
+  int roundingFactor = 1;
+  List<double> values = [];
+  double numberOfIncrements = 0;
+
+  bool isDivisibleByRequiredIncrement(double value) {
+    if (value % 10 == 0) {
+      return true;
+    }
+    if (value % 5 == 0) {
+      return true;
+    }
+    if (value % 0.5 == 0) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    for (int i = 0; i < widget.yaxisValues.length; i++) {
-      if (widget.yaxisValues[i] < 0) {
-        negative = true;
-        break;
-      } else {
-        negative = false;
-      }
-    }
-    for (int i = 0; i < widget.yaxisValues.length; i++) {
-      if (widget.yaxisValues[i] < 0) {
-        listToCheckIfAllValuesAreNegative.add(widget.yaxisValues[i]);
-      } else {
-        break;
-      }
-    }
-    if (listToCheckIfAllValuesAreNegative.length == widget.yaxisValues.length) {
-      allNegative = true;
-      negative = false;
-    } else {
-      allNegative = false;
-    }
-    listToCheckIfAllValuesAreNegative.clear();
-    if (negative) {
-      return mixedValueGraph();
-    } else if (allNegative) {
-      return negativeGraph();
-    } else {
-      dummyList.clear();
-      dummyList = List.generate(
-          widget.yaxisValues.length, (index) => widget.yaxisValues[index]);
-      dummyList.sort(
-        (a, b) => b.compareTo(a),
-      );
-      getLargestPositiveValue = dummyList[0].toInt();
+    // dummyList.clear();
+    // dummyListNegativeNumbers.clear();
+    // listToCheckIfAllValuesAreNegative.clear();
+    // for (int i = 0; i < widget.yaxisValues.length; i++) {
+    //   if (widget.yaxisValues[i] < 0) {
+    //     negative = true;
+    //     break;
+    //   } else {
+    //     negative = false;
+    //   }
+    // }
+    // for (int i = 0; i < widget.yaxisValues.length; i++) {
+    //   if (widget.yaxisValues[i] < 0) {
+    //     listToCheckIfAllValuesAreNegative.add(widget.yaxisValues[i]);
+    //   } else {
+    //     break;
+    //   }
+    // }
+    // if (listToCheckIfAllValuesAreNegative.length == widget.yaxisValues.length) {
+    //   allNegative = true;
+    //   negative = false;
+    // } else {
+    //   allNegative = false;
+    // }
+    // listToCheckIfAllValuesAreNegative.clear();
+    // if (negative) {
+    //   return mixedValueGraph();
+    // } else if (allNegative) {
+    //   return negativeGraph();
+    // } else {
+    // dummyList.clear();
+    // dummyList = List.generate(
+    //     widget.yaxisValues.length, (index) => widget.yaxisValues[index]);
+    // dummyList.sort(
+    //   (a, b) => b.compareTo(a),
+    // );
+    // getLargestPositiveValue = dummyList[0].toInt();
 
-      if (getLargestPositiveValue % incrementDifference != 0) {
-        getLargestPositiveValue += (incrementDifference -
-            (getLargestPositiveValue % incrementDifference));
-      }
-      numberOfIncrements =
-          (getLargestPositiveValue / incrementDifference).ceil();
-      if (numberOfIncrements > 7) {
-        numberOfIncrements = 4;
-        if (incrementDifference == 50) {
-          incrementDifference += 50;
-        } else {
-          incrementDifference += 100;
-        }
-      } else if (numberOfIncrements < 4) {
-        numberOfIncrements = 4;
-      }
+    // if (getLargestPositiveValue % incrementDifference != 0) {
+    //   getLargestPositiveValue += (incrementDifference -
+    //       (getLargestPositiveValue % incrementDifference));
+    // }
+    // numberOfIncrements =
+    //     (getLargestPositiveValue / incrementDifference).ceil();
+    // if (numberOfIncrements > 7) {
+    //   numberOfIncrements = 4;
+    //   if (incrementDifference == 50) {
+    //     incrementDifference += 50;
+    //   } else {
+    //     incrementDifference += 100;
+    //   }
+    // } else if (numberOfIncrements < 4) {
+    //   numberOfIncrements = 4;
+    // }
 
-      if (getLargestPositiveValue % incrementDifference != 0) {
-        getLargestPositiveValue += (incrementDifference -
-            (getLargestPositiveValue % incrementDifference));
-      }
+    // if (getLargestPositiveValue % incrementDifference != 0) {
+    //   getLargestPositiveValue += (incrementDifference -
+    //       (getLargestPositiveValue % incrementDifference));
+    // }
 
-      positiveVerticalUnitLength = widget.height / getLargestPositiveValue;
-      return positiveGraph();
+    // positiveVerticalUnitLength = widget.height / getLargestPositiveValue;
+    // if ((getLargestPositiveValue / numberOfIncrements) >
+    //     incrementDifference) {
+    //   incrementDifference = (getLargestPositiveValue ~/ numberOfIncrements);
+    //   if (getLargestPositiveValue % incrementDifference != 0) {
+    //     getLargestPositiveValue += (incrementDifference -
+    //         (getLargestPositiveValue % incrementDifference));
+    //   }
+    // }
+    values.clear();
+    roundingFactor = 1;
+
+    // Max = the maximum value in the yaxisValues list.
+    max = widget.yaxisValues.reduce(
+      (value, element) => value > element ? value : element,
+    );
+    tempForMax = max;
+
+    // If max value < 0, convert it to integer.
+    while (max.ceil() != max.floor()) {
+      max = tempForMax * roundingFactor;
+      roundingFactor *= 10;
     }
+
+    // If max is not divisible by either 0.5, 5, 10 keep updating it.
+    while (!isDivisibleByRequiredIncrement(max)) {
+      max++;
+    }
+
+    // Calculating the number of increments possible for the given data. Max is 7.
+    for (var i = 0; i < 7; i++) {
+      if ((max) % (i + 1) == 0) {
+        values.add(i + 1);
+      }
+    }
+
+    // partitionValue is the max value from values list which means we are using maximum number of partitions
+    numberOfIncrements =
+        values.reduce((value, element) => value > element ? value : element);
+
+    // Convert the max value back to < 0 if needed.
+    if (roundingFactor != 1) {
+      max /= (roundingFactor / 10);
+    }
+
+    // Value of each increment.
+    increment = (max) / numberOfIncrements;
+    return positiveGraph();
+    // }
   }
 
   Widget positiveGraph() {
@@ -183,7 +240,7 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     );
   }
 
-  Widget negativeGraph() {
+  /* Widget negativeGraph() {
     dummyListNegativeNumbers.clear();
     for (int i = 0; i < widget.yaxisValues.length; i++) {
       if (widget.yaxisValues[i] < 0) {
@@ -300,9 +357,9 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
         )
       ],
     );
-  }
+  } */
 
-  Widget mixedValueGraph() {
+  /*  Widget mixedValueGraph() {
     dummyList.clear();
     dummyListNegativeNumbers.clear();
     dummyList = List.generate(
@@ -606,13 +663,13 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
         )
       ],
     );
-  }
+  } */
 
-  Widget yaxisLines(int numberOfIncrements) {
+  Widget yaxisLines(double numberOfIncrements) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: List.generate(
-        numberOfIncrements,
+        numberOfIncrements.ceil(),
         (index) {
           return Expanded(
             child: Row(
@@ -621,8 +678,7 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
                 SizedBox(
                   width: widget.yaxisTextAndLinePadding,
                   child: Text(
-                    ((getLargestPositiveValue) - (index * incrementDifference))
-                        .toString(),
+                    ((max) - (index * increment)).toString(),
                     style: widget.textStyle ?? const TextStyle(height: 0.1),
                   ),
                 ),
@@ -673,7 +729,7 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
                       right: widget.barPadding,
                     ),
                     child: Container(
-                      height: ((positiveVerticalUnitLength *
+                      height: (((max / widget.height) *
                               (widget.yaxisValues[index]) -
                           4)),
                       decoration: BoxDecoration(
