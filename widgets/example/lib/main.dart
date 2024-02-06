@@ -486,18 +486,6 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           'Sat',
           'Sun',
         ],
-        yAxisLabel: Text(
-          'Profits',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-        ),
-        xAxisLabel: Text(
-          'Days of the Week',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-        ),
-        graphHeadingText: Text(
-          'Daily Profits',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-        ),
       ),
     );
   }

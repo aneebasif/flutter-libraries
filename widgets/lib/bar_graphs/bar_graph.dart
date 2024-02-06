@@ -6,7 +6,7 @@ class WOIBarGraph extends StatefulWidget {
     required this.yaxisValues,
     required this.xaxisValues,
     required this.height,
-    this.width,
+    required this.width,
     this.yAxisLabel,
     this.xAxisLabel,
     this.graphHeadingText,
@@ -18,11 +18,15 @@ class WOIBarGraph extends StatefulWidget {
     this.labelPadding,
     this.headingPadding,
     this.textStyle,
+    this.yaxisLabelTextBoxSize = 30,
+    this.headingTextBoxSize = 30,
+    this.xaxisLableTextBoxSize = 30,
+    this.topPadding = 0,
   });
   final List<double> yaxisValues;
   final List<String> xaxisValues;
   final double height;
-  final double? width;
+  final double width;
   final Text? yAxisLabel;
   final Text? xAxisLabel;
   final Text? graphHeadingText;
@@ -34,6 +38,10 @@ class WOIBarGraph extends StatefulWidget {
   final double? labelPadding;
   final double? headingPadding;
   final TextStyle? textStyle;
+  final double yaxisLabelTextBoxSize;
+  final double headingTextBoxSize;
+  final double xaxisLableTextBoxSize;
+  final double topPadding;
 
   @override
   State<WOIBarGraph> createState() => _WOIBarGraphState();
@@ -174,69 +182,90 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
   }
 
   Widget positiveGraph() {
-    return Row(
-      children: [
-        Visibility(
-          visible: widget.yAxisLabel != null,
-          child: RotatedBox(quarterTurns: -1, child: widget.yAxisLabel),
-        ),
-        SizedBox(
-          width: widget.labelPadding,
-        ),
-        Column(
-          children: [
-            Visibility(
-              visible: widget.graphHeadingText != null,
-              child: widget.graphHeadingText ?? Container(),
-            ),
-            SizedBox(
-              height: widget.headingPadding,
-            ),
-            Container(
-              height: widget.height,
-              width: widget.width ?? MediaQuery.of(context).size.width,
-              color: widget.backgroundColor,
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  yaxisLines(numberOfIncrements),
-                  positiveGraphBars(),
-                ],
-              ),
-            ),
-            Container(
-              width: widget.width,
-              padding: EdgeInsets.only(left: widget.yaxisTextAndLinePadding),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: List.generate(
-                  widget.xaxisValues.length,
-                  (index) => Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: widget.barPadding,
-                        right: widget.barPadding,
-                      ),
-                      child: Text(
-                        widget.xaxisValues[index],
-                        style: widget.textStyle,
-                        textAlign: TextAlign.center,
+    return Container(
+      color: widget.backgroundColor,
+      width: (widget.width + widget.yaxisLabelTextBoxSize),
+      child: Row(
+        children: [
+          Visibility(
+            visible: widget.yAxisLabel != null,
+            child: RotatedBox(
+                quarterTurns: -1,
+                child: SizedBox(
+                    height: widget.yaxisLabelTextBoxSize,
+                    width: widget.height,
+                    child: widget.yAxisLabel)),
+          ),
+          SizedBox(
+            width: widget.labelPadding,
+          ),
+          Container(
+            color: widget.backgroundColor,
+            child: Column(
+              children: [
+                Container(
+                  height: widget.topPadding,
+                  color: widget.backgroundColor,
+                ),
+                Visibility(
+                  visible: widget.graphHeadingText != null,
+                  child: SizedBox(
+                      height: widget.headingTextBoxSize,
+                      child: widget.graphHeadingText ?? Container()),
+                ),
+                SizedBox(
+                  height: widget.headingPadding,
+                ),
+                Container(
+                  height: widget.height,
+                  width: widget.width,
+                  color: widget.backgroundColor,
+                  child: Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      yaxisLines(numberOfIncrements),
+                      positiveGraphBars(),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: widget.width,
+                  padding:
+                      EdgeInsets.only(left: widget.yaxisTextAndLinePadding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: List.generate(
+                      widget.xaxisValues.length,
+                      (index) => Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: widget.barPadding,
+                            right: widget.barPadding,
+                          ),
+                          child: Text(
+                            widget.xaxisValues[index],
+                            style: widget.textStyle,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: widget.labelPadding,
+                ),
+                Visibility(
+                  visible: widget.xAxisLabel != null,
+                  child: SizedBox(
+                      height: widget.xaxisLableTextBoxSize,
+                      child: widget.xAxisLabel ?? Container()),
+                ),
+              ],
             ),
-            SizedBox(
-              height: widget.labelPadding,
-            ),
-            Visibility(
-              visible: widget.xAxisLabel != null,
-              child: widget.xAxisLabel ?? Container(),
-            ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 
