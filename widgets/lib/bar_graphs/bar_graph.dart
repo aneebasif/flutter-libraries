@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class WOIBarGraph extends StatefulWidget {
   const WOIBarGraph({
@@ -49,11 +50,16 @@ class WOIBarGraph extends StatefulWidget {
 
 class _WOIBarGraphState extends State<WOIBarGraph> {
   double max = 0;
+  double min = 0;
   double tempForMax = 0;
+  double tempForMin = 0;
   double increment = 0.2;
   int roundingFactor = 1;
   List<double> values = [];
   double numberOfIncrements = 0;
+  List<double> divisions = [];
+  double partinionValue = 0;
+  double stepSize = 1.0;
 
   bool isDivisibleByRequiredIncrement(double value) {
     if (value % 10 == 0) {
@@ -68,77 +74,52 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     return false;
   }
 
+  List<double> createBackgroundDivision(List<double> values) {
+    if (values.isEmpty) {
+      return [];
+    }
+
+    double maxVal = values.reduce(math.max);
+    double minVal = values.reduce(math.min);
+
+    // Calculate the range and dynamically determine an appropriate step size
+    double range = maxVal - minVal;
+    stepSize = 1.0;
+
+    /* while (isDivisibleByRequiredIncrement(stepSize)) {
+      stepSize *= 10;
+    } */
+    while (stepSize * 5 < range) {
+      stepSize *= 10;
+    }
+
+    // Find the nearest rounded values for min and max according to stepSize
+    minVal = (minVal / stepSize).floor() * stepSize;
+    maxVal = (maxVal / stepSize).ceil() * stepSize;
+
+    // Ensure the division covers the entire range correctly, including an extra step if needed
+    if (minVal - stepSize >=
+        (values.reduce(math.min) / stepSize).floor() * stepSize) {
+      minVal -= stepSize;
+    }
+
+    List<double> backgroundDivision = [];
+
+    // Populate the background division list
+    for (double val = maxVal; val >= minVal; val -= stepSize) {
+      backgroundDivision.add(val);
+    }
+
+    // Adjust to include one more step below if the lowest value is exactly on a step
+    if (backgroundDivision.last > minVal) {
+      backgroundDivision.add(minVal - stepSize);
+    }
+
+    return backgroundDivision;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // dummyList.clear();
-    // dummyListNegativeNumbers.clear();
-    // listToCheckIfAllValuesAreNegative.clear();
-    // for (int i = 0; i < widget.yaxisValues.length; i++) {
-    //   if (widget.yaxisValues[i] < 0) {
-    //     negative = true;
-    //     break;
-    //   } else {
-    //     negative = false;
-    //   }
-    // }
-    // for (int i = 0; i < widget.yaxisValues.length; i++) {
-    //   if (widget.yaxisValues[i] < 0) {
-    //     listToCheckIfAllValuesAreNegative.add(widget.yaxisValues[i]);
-    //   } else {
-    //     break;
-    //   }
-    // }
-    // if (listToCheckIfAllValuesAreNegative.length == widget.yaxisValues.length) {
-    //   allNegative = true;
-    //   negative = false;
-    // } else {
-    //   allNegative = false;
-    // }
-    // listToCheckIfAllValuesAreNegative.clear();
-    // if (negative) {
-    //   return mixedValueGraph();
-    // } else if (allNegative) {
-    //   return negativeGraph();
-    // } else {
-    // dummyList.clear();
-    // dummyList = List.generate(
-    //     widget.yaxisValues.length, (index) => widget.yaxisValues[index]);
-    // dummyList.sort(
-    //   (a, b) => b.compareTo(a),
-    // );
-    // getLargestPositiveValue = dummyList[0].toInt();
-
-    // if (getLargestPositiveValue % incrementDifference != 0) {
-    //   getLargestPositiveValue += (incrementDifference -
-    //       (getLargestPositiveValue % incrementDifference));
-    // }
-    // numberOfIncrements =
-    //     (getLargestPositiveValue / incrementDifference).ceil();
-    // if (numberOfIncrements > 7) {
-    //   numberOfIncrements = 4;
-    //   if (incrementDifference == 50) {
-    //     incrementDifference += 50;
-    //   } else {
-    //     incrementDifference += 100;
-    //   }
-    // } else if (numberOfIncrements < 4) {
-    //   numberOfIncrements = 4;
-    // }
-
-    // if (getLargestPositiveValue % incrementDifference != 0) {
-    //   getLargestPositiveValue += (incrementDifference -
-    //       (getLargestPositiveValue % incrementDifference));
-    // }
-
-    // positiveVerticalUnitLength = widget.height / getLargestPositiveValue;
-    // if ((getLargestPositiveValue / numberOfIncrements) >
-    //     incrementDifference) {
-    //   incrementDifference = (getLargestPositiveValue ~/ numberOfIncrements);
-    //   if (getLargestPositiveValue % incrementDifference != 0) {
-    //     getLargestPositiveValue += (incrementDifference -
-    //         (getLargestPositiveValue % incrementDifference));
-    //   }
-    // }
     values.clear();
     roundingFactor = 1;
 
@@ -146,10 +127,29 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     max = widget.yaxisValues.reduce(
       (value, element) => value > element ? value : element,
     );
-    tempForMax = max;
+
+    min = widget.yaxisValues.reduce(
+      (value, element) => value < element ? value : element,
+    );
+
+    if (min < 0) {
+      partinionValue = max - min;
+    }
+
+    max = partinionValue;
+
+    divisions = createBackgroundDivision(widget.yaxisValues);
+    max = divisions.first + divisions.last;
+    min = divisions.last;
+
+    partinionValue = widget.height / (divisions.length - 1);
+
+    print(partinionValue);
+
+    // tempForMin = min;
 
     // If max value < 0, convert it to integer.
-    while (max.ceil() != max.floor()) {
+    /* while (max.ceil() != max.floor()) {
       max = tempForMax * roundingFactor;
       roundingFactor *= 10;
     }
@@ -158,17 +158,33 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     while (!isDivisibleByRequiredIncrement(max)) {
       max++;
     }
+    /* while (!isDivisibleByRequiredIncrement(min)) {
+      min--;
+    } */
 
     // Calculating the number of increments possible for the given data. Max is 7.
     for (var i = 0; i < 7; i++) {
-      if ((max) % (i + 1) == 0) {
+      if ((max - min) % (i + 1) == 0) {
         values.add(i + 1);
       }
     }
 
+    /* List<int> minVal = [];
+    // Calculating the number of increments possible for the given data. Max is 7.
+    for (var i = 0; i < 7; i++) {
+      if ((min) % (i + 1) == 0) {
+        minVal.add(i + 1);
+      }
+    }
+ */
     // partitionValue is the max value from values list which means we are using maximum number of partitions
     numberOfIncrements =
         values.reduce((value, element) => value > element ? value : element);
+
+    // int temp =
+    //     minVal.reduce((value, element) => value < element ? value : element);
+
+    // minVal = values.reduce((value, element) => value > element ? value : element);
 
     // Convert the max value back to < 0 if needed.
     if (roundingFactor != 1) {
@@ -176,9 +192,9 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     }
 
     // Value of each increment.
-    increment = (max) / numberOfIncrements;
+    increment = (max) / numberOfIncrements; */
+
     return positiveGraph();
-    // }
   }
 
   Widget positiveGraph() {
@@ -695,45 +711,104 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
   } */
 
   Widget yaxisLines(double numberOfIncrements) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: List.generate(
-        numberOfIncrements.ceil(),
-        (index) {
-          return Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: widget.yaxisTextAndLinePadding,
-                  child: Text(
-                    ((max) - (index * increment)).toString(),
-                    style: widget.textStyle ?? const TextStyle(height: 0.1),
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 1,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              top: BorderSide(
-                                width: 0.5,
-                                color: widget.incrementColors,
-                              ),
+    return Container(
+      // color: Colors.green,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: List.generate(
+              // divisions
+              divisions.length - 1,
+              (index) {
+                /* String stringVal =
+                    ((max + min) - (index * increment)).toStringAsFixed(0); */
+                // print(stringVal);
+                return Container(
+                  child: Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: widget.yaxisLabelTextBoxSize,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              divisions[index].toStringAsFixed(0),
+                              style: widget.textStyle ??
+                                  const TextStyle(
+                                    height: 0.1,
+                                  ),
+                              textAlign: TextAlign.start,
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      top: BorderSide(
+                                        width: 0.5,
+                                        color: widget.incrementColors,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                );
+              },
+            ) +
+            [
+              Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: widget.yaxisLabelTextBoxSize,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          divisions.last.toStringAsFixed(0),
+                          // ((max + min) - (5 * increment)).toStringAsFixed(0),
+                          style: widget.textStyle ??
+                              const TextStyle(
+                                height: 0.1,
+                              ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    width: 0.5,
+                                    color: widget.incrementColors,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
+              )
+            ],
       ),
     );
   }
@@ -748,19 +823,75 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
         children: List.generate(
           widget.yaxisValues.length,
           (index) {
+            double value = 0;
+            double minVal = 0;
+            double paddingValue = 0;
+            if (divisions.last < 0) {
+              double upperMaxSteps = divisions.last / stepSize;
+              double maxVal = partinionValue * (upperMaxSteps);
+              value = (maxVal.abs() /
+                          //
+                          // 200
+                          divisions.last.abs()
+                      //
+                      ) *
+                      widget.yaxisValues[index].abs() -
+                  3;
+
+              double multipl = (divisions.last / stepSize).abs();
+              minVal = partinionValue * (multipl);
+
+              double minMax = 0;
+              if (isNegativeValue(index)) {
+                minMax = minVal.abs();
+                value = (minMax / divisions.last.abs()) *
+                    widget.yaxisValues[index].abs();
+              }
+
+              paddingValue = minMax - value;
+              if (value < 0) {
+                value = 0;
+              }
+            } else {
+              value = (widget.height / max) * widget.yaxisValues[index];
+            }
             return Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  isNegativeValue(index)
+                      ? Column(
+                          children: [
+                            Container(
+                              height: 3,
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                  top: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                  right: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                  left: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(),
                   Padding(
                     padding: EdgeInsets.only(
                       left: widget.barPadding,
                       right: widget.barPadding,
+                      bottom: isNegativeValue(index) ? (paddingValue) : 0,
                     ),
                     child: Container(
-                      height: (((max / widget.height) *
-                              (widget.yaxisValues[index]) -
-                          4)),
+                      height: value,
                       decoration: BoxDecoration(
                         color: widget.barColors,
                         border: const Border(
@@ -771,29 +902,36 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 3,
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              top: BorderSide(
-                                color: Colors.black,
-                                width: 1,
+                  isNegativeValue(index)
+                      ? Container()
+                      : Padding(
+                          padding: EdgeInsets.only(
+                            bottom: minVal,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 3,
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      top: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                      ),
+                                      right: BorderSide(
+                                        color: Colors.black,
+                                      ),
+                                      left: BorderSide(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                              right: BorderSide(
-                                color: Colors.black,
-                              ),
-                              left: BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             );
@@ -801,5 +939,9 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
         ),
       ),
     );
+  }
+
+  bool isNegativeValue(int index) {
+    return widget.yaxisValues[index] < 0;
   }
 }
