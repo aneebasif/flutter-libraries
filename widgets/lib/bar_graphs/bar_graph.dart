@@ -55,7 +55,7 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
   double tempForMin = 0;
   double increment = 0.2;
   int roundingFactor = 1;
-  List<double> values = [];
+  // List<double> values = [];
   double numberOfIncrements = 0;
   List<double> divisions = [];
   double partinionValue = 0;
@@ -82,8 +82,11 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     double maxVal = values.reduce(math.max);
     double minVal = values.reduce(math.min);
 
+    double maxTempVal = math.max(maxVal.abs(), minVal.abs());
+    double minTempVal = math.min(maxVal.abs(), minVal.abs());
+
     // Calculate the range and dynamically determine an appropriate step size
-    double range = maxVal - minVal;
+    double range = maxTempVal - minTempVal;
     stepSize = 1.0;
 
     /* while (isDivisibleByRequiredIncrement(stepSize)) {
@@ -120,7 +123,6 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
 
   @override
   Widget build(BuildContext context) {
-    values.clear();
     roundingFactor = 1;
 
     // Max = the maximum value in the yaxisValues list.
