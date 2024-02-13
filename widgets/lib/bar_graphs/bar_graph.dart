@@ -55,24 +55,11 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
   double tempForMin = 0;
   double increment = 0.2;
   int roundingFactor = 1;
-  // List<double> values = [];
-  double numberOfIncrements = 0;
+  int positiveNumberOfIncrements = 0;
+  int negativeNumberOfIncrements = 0;
   List<double> divisions = [];
   double partinionValue = 0;
-  double stepSize = 1.0;
-
-  bool isDivisibleByRequiredIncrement(double value) {
-    if (value % 10 == 0) {
-      return true;
-    }
-    if (value % 5 == 0) {
-      return true;
-    }
-    if (value % 0.5 == 0) {
-      return true;
-    }
-    return false;
-  }
+  double stepSize = 0;
 
   List<double> createBackgroundDivision(List<double> values) {
     if (values.isEmpty) {
@@ -87,18 +74,29 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
 
     // Calculate the range and dynamically determine an appropriate step size
     double range = maxTempVal - minTempVal;
-    stepSize = 1.0;
 
-    /* while (isDivisibleByRequiredIncrement(stepSize)) {
-      stepSize *= 10;
-    } */
-    while (stepSize * 5 < range) {
-      stepSize *= 10;
+    while (stepSize * 10 < range) {
+      stepSize += 0.1;
     }
 
     // Find the nearest rounded values for min and max according to stepSize
     minVal = (minVal / stepSize).floor() * stepSize;
     maxVal = (maxVal / stepSize).ceil() * stepSize;
+
+    // Finding the positive number of increments
+    // if (maxVal >= 1) {
+    //   for (int i = 4; i < 8; i++) {
+    //     if (maxVal % i == 0) {
+    //       positiveNumberOfIncrements = i;
+    //     }
+    //   }
+    // } else {
+    //   for (double i = 0.4; i < 0.8; i += 0.1) {
+    //     if (maxVal % i == 0) {
+    //       positiveNumberOfIncrements = (i * 10).toInt();
+    //     }
+    //   }
+    // }
 
     // Ensure the division covers the entire range correctly, including an extra step if needed
     if (minVal - stepSize >=
@@ -106,19 +104,21 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
       minVal -= stepSize;
     }
 
-    List<double> backgroundDivision = [];
+    List<double> backgroundPositiveDivisions = [];
 
     // Populate the background division list
-    for (double val = maxVal; val >= minVal; val -= stepSize) {
-      backgroundDivision.add(val);
+    for (int i = 0; i <= positiveNumberOfIncrements; i++) {
+      backgroundPositiveDivisions
+          .add((maxVal / positiveNumberOfIncrements) * i);
     }
 
     // Adjust to include one more step below if the lowest value is exactly on a step
-    if (backgroundDivision.last > minVal) {
-      backgroundDivision.add(minVal - stepSize);
+    if (backgroundPositiveDivisions.last > minVal) {
+      backgroundPositiveDivisions.add(minVal - stepSize);
     }
 
-    return backgroundDivision;
+    backgroundPositiveDivisions.sort((a, b) => b.compareTo(a));
+    return backgroundPositiveDivisions; //TODO
   }
 
   @override
@@ -145,56 +145,6 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     min = divisions.last;
 
     partinionValue = widget.height / (divisions.length - 1);
-
-    print(partinionValue);
-
-    // tempForMin = min;
-
-    // If max value < 0, convert it to integer.
-    /* while (max.ceil() != max.floor()) {
-      max = tempForMax * roundingFactor;
-      roundingFactor *= 10;
-    }
-
-    // If max is not divisible by either 0.5, 5, 10 keep updating it.
-    while (!isDivisibleByRequiredIncrement(max)) {
-      max++;
-    }
-    /* while (!isDivisibleByRequiredIncrement(min)) {
-      min--;
-    } */
-
-    // Calculating the number of increments possible for the given data. Max is 7.
-    for (var i = 0; i < 7; i++) {
-      if ((max - min) % (i + 1) == 0) {
-        values.add(i + 1);
-      }
-    }
-
-    /* List<int> minVal = [];
-    // Calculating the number of increments possible for the given data. Max is 7.
-    for (var i = 0; i < 7; i++) {
-      if ((min) % (i + 1) == 0) {
-        minVal.add(i + 1);
-      }
-    }
- */
-    // partitionValue is the max value from values list which means we are using maximum number of partitions
-    numberOfIncrements =
-        values.reduce((value, element) => value > element ? value : element);
-
-    // int temp =
-    //     minVal.reduce((value, element) => value < element ? value : element);
-
-    // minVal = values.reduce((value, element) => value > element ? value : element);
-
-    // Convert the max value back to < 0 if needed.
-    if (roundingFactor != 1) {
-      max /= (roundingFactor / 10);
-    }
-
-    // Value of each increment.
-    increment = (max) / numberOfIncrements; */
 
     return positiveGraph();
   }
@@ -241,7 +191,7 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
                   child: Stack(
                     alignment: Alignment.bottomLeft,
                     children: [
-                      yaxisLines(numberOfIncrements),
+                      yaxisLines(positiveNumberOfIncrements),
                       positiveGraphBars(),
                     ],
                   ),
@@ -287,499 +237,66 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
     );
   }
 
-  /* Widget negativeGraph() {
-    dummyListNegativeNumbers.clear();
-    for (int i = 0; i < widget.yaxisValues.length; i++) {
-      if (widget.yaxisValues[i] < 0) {
-        dummyListNegativeNumbers.add(widget.yaxisValues[i].abs());
-      }
-    }
-    dummyListNegativeNumbers.sort(
-      (a, b) => b.compareTo(a),
-    );
-    getLargestNegativeValue = dummyListNegativeNumbers[0].toInt();
-
-    if (getLargestNegativeValue % incrementDifference != 0) {
-      getLargestNegativeValue += (incrementDifference -
-          (getLargestNegativeValue % incrementDifference));
-    }
-    numberOfIncrements = (getLargestNegativeValue / incrementDifference).ceil();
-    negativeVerticalUnitLength = widget.height / getLargestNegativeValue;
-    return Column(
-      children: [
-        Container(
-          height: widget.height,
-          width: MediaQuery.of(context).size.width,
-          color: widget.backgroundColor,
-          child: Stack(
-            alignment: Alignment.topLeft,
-            children: [
-              yaxisLines(numberOfIncrements),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: widget.yaxisTextAndLinePadding,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    widget.yaxisValues.length,
-                    (index) {
-                      return Expanded(
-                        child: Stack(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: 3,
-                                    decoration: const BoxDecoration(
-                                      border: Border(
-                                        top: BorderSide(
-                                          color: Colors.black,
-                                          width: 1,
-                                        ),
-                                        right: BorderSide(
-                                          color: Colors.black,
-                                        ),
-                                        left: BorderSide(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+  Widget yaxisLines(int numberOfIncrements) {
+    return SizedBox(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: List.generate(
+              numberOfIncrements,
+              (index) {
+                return Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: widget.yaxisLabelTextBoxSize,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            divisions[index].toString(),
+                            style: widget.textStyle ??
+                                const TextStyle(
+                                  height: 0.1,
                                 ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: widget.barPadding,
-                                right: widget.barPadding,
-                              ),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
                               child: Container(
-                                height: ((negativeVerticalUnitLength *
-                                        (widget.yaxisValues[index].abs()) -
-                                    4)),
+                                height: 1,
                                 decoration: BoxDecoration(
-                                  color: widget.barColors,
-                                  border: const Border(
-                                    top: BorderSide(),
-                                    left: BorderSide(),
-                                    right: BorderSide(),
-                                    bottom: BorderSide(),
+                                  border: Border(
+                                    top: BorderSide(
+                                      width: 0.5,
+                                      color: widget.incrementColors,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: widget.yaxisTextAndLinePadding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: List.generate(
-              widget.xaxisValues.length,
-              (index) => Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: (widget.yaxisTextAndLinePadding * 2),
-                  ),
-                  child: Text(
-                    widget.xaxisValues[index],
-                    style: widget.textStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  } */
-
-  /*  Widget mixedValueGraph() {
-    dummyList.clear();
-    dummyListNegativeNumbers.clear();
-    dummyList = List.generate(
-        widget.yaxisValues.length, (index) => widget.yaxisValues[index]);
-    dummyList.sort(
-      (a, b) => b.compareTo(a),
-    );
-    getLargestPositiveValue = dummyList[0].toInt();
-    if (getLargestPositiveValue % incrementDifference != 0) {
-      getLargestPositiveValue += (incrementDifference -
-          (getLargestPositiveValue % incrementDifference));
-    }
-    positiveVerticalUnitLength = widget.height / getLargestPositiveValue;
-    for (int i = 0; i < widget.yaxisValues.length; i++) {
-      if (widget.yaxisValues[i] < 0) {
-        dummyListNegativeNumbers.add(widget.yaxisValues[i].abs());
-      }
-    }
-
-    dummyListNegativeNumbers.sort(
-      (a, b) => b.compareTo(a),
-    );
-    getLargestNegativeValue = dummyListNegativeNumbers[0].toInt();
-    if (getLargestNegativeValue % incrementDifference != 0) {
-      getLargestNegativeValue += (incrementDifference -
-          (getLargestNegativeValue % incrementDifference));
-    }
-    numberOfIncrements = (getLargestPositiveValue / incrementDifference).ceil();
-    negativeVerticalUnitLength = widget.height / getLargestNegativeValue;
-    return Column(
-      children: [
-        Container(
-          height: widget.height,
-          width: MediaQuery.of(context).size.width,
-          color: widget.backgroundColor,
-          child: Column(
-            children: [
-              SizedBox(
-                height: widget.height -
-                    (widget.height /
-                        getLargestPositiveValue *
-                        incrementDifference),
-                child: Stack(
-                  children: [
-                    yaxisLines(numberOfIncrements),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: widget.yaxisTextAndLinePadding,
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: List.generate(
-                          widget.yaxisValues.length,
-                          (index) {
-                            return Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: widget.barPadding,
-                                      right: widget.barPadding,
-                                    ),
-                                    child: Container(
-                                      height: widget.yaxisValues[index] >= 0
-                                          ? (((positiveVerticalUnitLength / 2) *
-                                              (widget.yaxisValues[index])))
-                                          : 0,
-                                      decoration: BoxDecoration(
-                                        color: widget.barColors,
-                                        border: const Border(
-                                          top: BorderSide(),
-                                          left: BorderSide(),
-                                          right: BorderSide(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 0,
-                                          decoration: const BoxDecoration(
-                                            border: Border(
-                                              top: BorderSide(
-                                                color: Colors.black,
-                                                width: 1,
-                                              ),
-                                              right: BorderSide(
-                                                color: Colors.black,
-                                              ),
-                                              left: BorderSide(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: widget.height /
-                    getLargestPositiveValue *
-                    incrementDifference,
-                child: Stack(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(
-                        1,
-                        (index) {
-                          return Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  width: widget.yaxisTextAndLinePadding,
-                                  child: Text(
-                                    "-${(50 + (index * incrementDifference))}",
-                                    style: widget.textStyle ??
-                                        const TextStyle(height: 0.1),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 1,
-                                          decoration: BoxDecoration(
-                                            border: Border(
-                                              top: BorderSide(
-                                                width: 0.5,
-                                                color: widget.incrementColors,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.only(left: widget.yaxisTextAndLinePadding),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: List.generate(
-                          widget.yaxisValues.length,
-                          (index) {
-                            return Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  widget.yaxisValues[index] < 0
-                                      ? Row(
-                                          children: [
-                                            Expanded(
-                                              child: Stack(
-                                                children: [
-                                                  Container(
-                                                    height: 3,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      border: Border(
-                                                        top: BorderSide(
-                                                          color: Colors.black,
-                                                          width: 1,
-                                                        ),
-                                                        right: BorderSide(
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                      left: widget.barPadding,
-                                                      right: widget.barPadding,
-                                                    ),
-                                                    child:
-                                                        widget.yaxisValues[
-                                                                    index] >=
-                                                                0
-                                                            ? Container()
-                                                            : Container(
-                                                                height: ((((widget.height /
-                                                                            getLargestPositiveValue *
-                                                                            incrementDifference) /
-                                                                        getLargestNegativeValue) *
-                                                                    (widget
-                                                                        .yaxisValues[
-                                                                            index]
-                                                                        .abs()))),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: widget
-                                                                      .barColors,
-                                                                  border:
-                                                                      const Border(
-                                                                    top:
-                                                                        BorderSide(),
-                                                                    bottom:
-                                                                        BorderSide(),
-                                                                    left:
-                                                                        BorderSide(),
-                                                                    right:
-                                                                        BorderSide(),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : Container(),
-                                  widget.yaxisValues[index] >= 0
-                                      ? Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                height: 3,
-                                                decoration: BoxDecoration(
-                                                  border: index == 0
-                                                      ? const Border(
-                                                          top: BorderSide(
-                                                            color: Colors.black,
-                                                            width: 1,
-                                                          ),
-                                                          right: BorderSide(
-                                                            color: Colors.black,
-                                                          ),
-                                                          left: BorderSide(
-                                                            color: Colors.black,
-                                                          ),
-                                                        )
-                                                      : const Border(
-                                                          top: BorderSide(
-                                                            color: Colors.black,
-                                                            width: 1,
-                                                          ),
-                                                          right: BorderSide(
-                                                            color: Colors.black,
-                                                          ),
-                                                        ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : Container()
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: widget.yaxisTextAndLinePadding),
-          child: Row(
-            children: List.generate(
-              widget.xaxisValues.length,
-              (index) => Expanded(
-                child: SizedBox(
-                  child: Text(
-                    widget.xaxisValues[index],
-                    style: widget.textStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  } */
-
-  Widget yaxisLines(double numberOfIncrements) {
-    return Container(
-      // color: Colors.green,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: List.generate(
-              // divisions
-              divisions.length - 1,
-              (index) {
-                /* String stringVal =
-                    ((max + min) - (index * increment)).toStringAsFixed(0); */
-                // print(stringVal);
-                return Container(
-                  child: Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: widget.yaxisLabelTextBoxSize,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              divisions[index].toStringAsFixed(0),
-                              style: widget.textStyle ??
-                                  const TextStyle(
-                                    height: 0.1,
-                                  ),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      top: BorderSide(
-                                        width: 0.5,
-                                        color: widget.incrementColors,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    ],
                   ),
                 );
               },
             ) +
             [
-              Container(
+              Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       width: widget.yaxisLabelTextBoxSize,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          divisions.last.toStringAsFixed(0),
-                          // ((max + min) - (5 * increment)).toStringAsFixed(0),
+                          divisions.last.toStringAsFixed(1),
                           style: widget.textStyle ??
                               const TextStyle(
                                 height: 0.1,
@@ -831,12 +348,7 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
             if (divisions.last < 0) {
               double upperMaxSteps = divisions.last / stepSize;
               double maxVal = partinionValue * (upperMaxSteps);
-              value = (maxVal.abs() /
-                          //
-                          // 200
-                          divisions.last.abs()
-                      //
-                      ) *
+              value = (maxVal.abs() / divisions.last.abs()) *
                       widget.yaxisValues[index].abs() -
                   3;
 
@@ -893,7 +405,7 @@ class _WOIBarGraphState extends State<WOIBarGraph> {
                       bottom: isNegativeValue(index) ? (paddingValue) : 0,
                     ),
                     child: Container(
-                      height: value,
+                      height: value.abs(),
                       decoration: BoxDecoration(
                         color: widget.barColors,
                         border: const Border(

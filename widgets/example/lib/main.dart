@@ -476,7 +476,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         height: 300,
         width: 320,
         barPadding: 5,
-        yaxisValues: [-200, -500, -100, -0, -50, -250, 1000],
+        yaxisValues: [1, -1, 2, 3, 4, 2, 1],
         xaxisValues: [
           'Mon',
           'Tue',
@@ -486,6 +486,8 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           'Sat',
           'Sun',
         ],
+        xAxisLabel: Text('Days'),
+        graphHeadingText: Text('Profits'),
       ),
     );
   }
