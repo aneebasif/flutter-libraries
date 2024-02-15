@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weoveri_flutter_widgets/graphs/line_graph/data_line_properties.dart';
 import 'package:weoveri_flutter_widgets/woi_widgets.dart';
 
 void main() {
@@ -290,9 +291,57 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
           const WOICountdownTimer(
             isHoursNeeded: true,
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 30),
-            child: WOIBarGraph(),
+          //---------LineGraph---------//
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 30,
+              bottom: 30,
+            ),
+            child: WOILineGraph(
+              height: 300,
+              width: 340,
+              heading: const Text(
+                'Profits',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              xaxisLabel: const Text(
+                'Days of the week',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              yaxisLabel: const Text(
+                'Daily profit',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              leftSpacing: 30,
+              bottomSpacing: 50,
+              topSpacing: 50,
+              yaxisValues: [
+                LineProperties(
+                  values: const [0.1, 0.2, 0.3, 0.4, 10, 0.6, 0.7, 0.8, 0.1],
+                  filledGraph: true,
+                  fillColor: Colors.lightBlue.withOpacity(0.1),
+                ),
+                LineProperties(
+                  values: const [1, 2, 3, 8, 20, 9, 7, 8, 1],
+                  filledGraph: false,
+                  fillColor: Colors.lightBlue.withOpacity(0.1),
+                  showDataPoints: true,
+                ),
+                LineProperties(
+                  values: const [9, 9, 9, 9, 9, 9, 9, 9, 9],
+                  filledGraph: false,
+                  fillColor: Colors.lightBlue.withOpacity(0.1),
+                  showDataPoints: false,
+                ),
+              ],
+              xaxisValues: const [1, 2, 3, 4, 5, 6, 'Sun', '', ''],
+              dottedYaxis: true,
+              xaxisAndTextGap: 20,
+              xaxisSeparatorLength: 3,
+            ),
           ),
         ],
       ),
