@@ -512,4 +512,44 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       ),
     );
   }
+
+  /// Count down timer variation1
+  Widget countDownTimerVariation1() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: WOICountdowns(
+        timeInSeconds: 10,
+        timerSize: 200,
+        timerWidth: 20,
+        timerBackgroundColor: Colors.amber[100]!,
+        timerFillColor: Colors.amber,
+        cooldownTimerBoxDecoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(200),
+        ),
+      ),
+    );
+  }
+
+  /// Bar graph and histogram
+  Widget barGraphAndHistogram() {
+    return const Padding(
+      padding: EdgeInsets.only(top: 30),
+      child: WOIBarGraph(
+        height: 300,
+        width: 320,
+        barPadding: 5,
+        yaxisValues: [10.0, -10.8, -0.1],
+        xaxisValues: [
+          'Mon',
+          'Tue',
+          'Wed',
+          'Thu',
+          'Fri',
+          'Sat',
+          'Sun',
+        ],
+      ),
+    );
+  }
 }
