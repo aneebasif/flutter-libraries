@@ -8,7 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  dartdoc: ^6.3.0
+  dartdoc: ^8.2.0
   flutter:
     sdk: flutter
 
